@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import layout from '../src/components/Layout';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+  <Layout>
+    {/* tutaj będą wszystkie nasze widoczki */}
+  </Layout>
   </React.StrictMode>,
   document.getElementById('root')
 );
