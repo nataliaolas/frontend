@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import layout from '../src/components/Layout';
+import ButtonAppBar from '../src/components/layout/Layout';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-  <Layout>
-    {/* tutaj będą wszystkie nasze widoczki */}
-  </Layout>
+  <ButtonAppBar>
+    {/*tu bedo wszystkie rzeczy*/}
+  </ButtonAppBar>
   </React.StrictMode>,
   document.getElementById('root')
 );
