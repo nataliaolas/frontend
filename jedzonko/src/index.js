@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import layout from '../src/components/Layout';
+import SimpleMenu from './components/menu/menu'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-  <Layout>
+  {/* <Layout>
     {/* tutaj będą wszystkie nasze widoczki */}
-  </Layout>
+ {/* </Layout> */}
+    <SimpleMenu></SimpleMenu>
   </React.StrictMode>,
   document.getElementById('root')
 );
