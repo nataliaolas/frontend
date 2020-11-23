@@ -29,10 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
+    zIndex: theme.zIndex.drawer + 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -86,7 +83,7 @@ function ResponsiveDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="absolute" className={classes.appBar}>
         <Toolbar>
           <IconButton
             color="inherit"
