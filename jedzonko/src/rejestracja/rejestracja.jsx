@@ -12,10 +12,13 @@ export default function Rejestracja() {
                     <div textAlign="center">
                         <TextField required id="standard-basic" className={classes.textField} label="Imię" name="imie" />
                         <TextField required id="standard-basic" className={classes.textField} label="Nazwisko" name="nazwisko" />
+                        <TextField required id="standard-basic" className={classes.textField} label="E-mail" name="email" />
                         <TextField required id="standard-basic" className={classes.textField} label="Hasło" name="haslo" />
+                        <TextField required id="standard-basic" className={classes.textField} label="Licencja sanepidu" name="licencjasanepidu" />
+                        <TextField required id="standard-basic" className={classes.textField} label="Numer telefonu" name="numertelefonu" />
                     </div>
                     <div>
-                        <Button variant="contained"  type="submit"> Zarejestruj konto </Button>
+                        <Button variant="contained"  type="submit" textAlign="center"> Zarejestruj konto </Button>
                     </div>
                 </Paper>
             </Grid>

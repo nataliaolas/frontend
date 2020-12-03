@@ -2,12 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      '& > *': {
         margin: theme.spacing(2),
         width: '60ch',
         margin: 'auto',
         position: 'relative',
-      },
     },
     napis:
     {
@@ -23,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(2),
       marginRight: theme.spacing(2),
       marginTop: theme.spacing(2),
+      margin:theme.spacing(3),
       width: 200,
       textAlign: 'center'
     },
@@ -30,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#190423',
       margin: theme.spacing(2),
       color: 'white',
-      fontSize: '18px'
+      fontSize: '18px',
+      textAlign:'center'
     },
 }));
 
