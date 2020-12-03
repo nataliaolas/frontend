@@ -6,12 +6,14 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Container } from '@material-ui/core';
+import { Home } from "../../paths/Routs";
+import MainPage from "./Home"; 
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,   
+    flexGrow: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -53,12 +55,7 @@ const useStyles = makeStyles((theme) => ({
       width: '20ch',
     },
   },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 150,
-    left: '-600px',
-  },
-  appbar:{
+  appbar: {
     backgroundColor: '#B10B31',
   }
 }));
@@ -67,44 +64,25 @@ export default function ButtonAppBar() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appbar}>
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            <FastfoodIcon />
+    <Router>
+      <div className={classes.root}>
+        <AppBar position="static" className={classes.appbar}>
+          <Toolbar>
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              <FastfoodIcon />
             Jedzonko.pl
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Miasto..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Typ Restauracji.."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+          </Typography>           
+            <Button color="inherit">Login</Button>
+          </Toolbar>
+        </AppBar>
+        <Container>
+          <Switch>
+            <Route path={ Home } component = { MainPage }/>
+          </Switch>
+        </Container>        
+      </div>
+    </Router>
   );
 }
