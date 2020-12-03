@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     root: {
         margin: theme.spacing(2),
-        width: '60ch',
+        width: '80ch',
         margin: 'auto',
-        position: 'relative',
+        position: 'absolute',
     },
     napis:
     {
