@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core";
     napis:
     {
         color: '#f09559',
-        margin: theme.spacing(4),
+        margin: theme.spacing(6),
         width: '25ch',
         margin: 'auto',
         fontSize: '25px',
@@ -13,13 +13,12 @@ import { makeStyles } from "@material-ui/core";
 
     },
     root: {
-        margin: theme.spacing(2),
         margin: 'auto',
         position: 'relative',
         top: '100px',
         left: '100px',
-        width: '600px',
-        height: '600px'
+        width: '800px',
+        height: '800px'
     },
     button: {
         backgroundColor: '#f09559',
@@ -38,7 +37,7 @@ import { makeStyles } from "@material-ui/core";
         textAlign: 'center'
     },
     rot: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(4),
         color: '#f09559',
 
     },
@@ -46,5 +45,10 @@ import { makeStyles } from "@material-ui/core";
         padding: theme.spacing(2),
         color: '#f09559',
     },
+    fab:{
+        margin: theme.spacing(2),
+        color: '#f09559',
+        align:'right'
+    }
 }));
  export default useStyles;
