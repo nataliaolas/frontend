@@ -4,7 +4,7 @@ import DodanieRestauracji from './dodanieRestauracji/dodanierestauracji';
 
 function App() {
   return (
-<DodanieRestauracji/>
+    <p>trololo</p>
   );
 }
 
