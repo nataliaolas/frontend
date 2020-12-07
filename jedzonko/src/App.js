@@ -4,7 +4,7 @@ import Formularz from './components/FormularzZamowienia/formularzZamowienia';
 import KrokiZamowienia from './components/FormularzZamowienia/krokiZamowienia';
 function App() {
   return (
-<KrokiZamowienia/>
+    <p>trololo</p>
   );
 }
 
