@@ -7,17 +7,68 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useForm } from "react-hook-form";
+import apiClient from '../api/apiClient';
 
 export default function DodanieRestauracji() {
     const classes = useStyles();
-    const { handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const [nazwa, setNazwa] = useState("");
+    const [miasto, setMiasto] = useState("");
+    const [typ, setTyp] = useState("");
+    const [opis, setOpis] = useState("");
+    const [data, setData] = useState();
+    const[nazwadania,setDanie] = useState("");
+    const[cena,setCena] = useState("");
+    const[skladniki, setSkladniki] = useState("");
+    const [restauracje, TypyRestauracji] = React.useState('');
+    const handleChangers = (event) => {
+        TypyRestauracji(event.target.value);
+    };
+
+    const { handleSubmit} = useForm(
+        {
+            mode: 'onSubmit',
+        },
+    );
+
+
+    const DodanieRestauracji = async (form) => {
+        await apiClient.post(`http://127.0.0.1:8000/restauracja/`, form);
+    };
+
+    const DodanieMenu = async (form) => {
+        await apiClient.post(`http://127.0.0.1:8000/pozycja/`, form);
+    };
+
+    useEffect(() => {
+        const TypyRestauracji = async () => {
+            const response = await apiClient.get(`http://127.0.0.1:8000/typrestauracji/`);
+            console.log("Odpowiedz", response.data);
+            setData(response.data);
+            return response.data;
+        }
+        const restauracje = TypyRestauracji();
+    }, []);
+    const handleChange = (form) => {
+        form.nazwa = nazwa;
+        form.miasto = miasto;
+        form.typ = typ;
+        form.opis = opis;
+        DodanieRestauracji(form);
+    }
+
+    const handleChange1 = (form) =>{
+        form.nazwadania = nazwadania;
+        form.cena = cena;
+        form.skladniki = skladniki;
+        DodanieMenu(form);
+        console.log("form",form)
+    }
+
 
     return (
-        <form >
-            <Grid container spacing={3}>
-                <Paper className={classes.root}>
-                <form >
+        <Grid container spacing={3}>
+            <div className={classes.root}>
+                <form onSubmit={handleSubmit(handleChange)} >
                     <div className={classes.napis}>Dodanie restauracji</div>
                     <Paper outlined={3}>
                         <div align="center">
@@ -26,6 +77,8 @@ export default function DodanieRestauracji() {
                                     id="standard-basic"
                                     label="Nazwa restauracji"
                                     name="nazwa"
+                                    value={nazwa}
+                                    onChange={(e) => setNazwa(e.target.value)}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6} spacing={3}>
@@ -34,6 +87,8 @@ export default function DodanieRestauracji() {
                                     label="Miasto"
                                     name="miasto"
                                     defaultValue=''
+                                    value={miasto}
+                                    onChange={(e) => setMiasto(e.target.value)}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6} spacing={2}>
@@ -44,7 +99,12 @@ export default function DodanieRestauracji() {
                                         style={{ minWidth: 165 }}
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
+                                        value={typ}
+                                        onChange={(e) => setTyp(e.target.value)}
                                     >
+                                        {data?.map((restauracje) => (
+                                            <MenuItem key={restauracje.id} value={restauracje.id} >{restauracje.nazwa}</MenuItem>
+                                        ))}
                                     </Select>
                                 </div>
                             </Grid>
@@ -58,57 +118,61 @@ export default function DodanieRestauracji() {
                                         rowsMax={4}
                                         name="opisrestauracji"
                                         defaultValue=''
+                                        value={opis}
+                                        onChange={(e) => setOpis(e.target.value)}
                                     />
                                 </Grid>
                             </div>
+                            <div align='center'>
+                                <Button variant="contained" className={classes.button} type="submit"> Dodaj  </Button>
+                            </div>
                         </div>
                     </Paper>
+                    </form>
+
+
+
+                     <form onSubmit={handleSubmit(handleChange1)}>                      
                     <div className={classes.napis}>Dodanie MENU</div>
-                    <Paper outlined={3}>
-                        <div align="center">
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                        <Grid direction="row" xs={12}>
-                        <Grid item xs={3} spacing={2}>
-                            <TextField
-                                required id="standard-basic"
-                                label="Nazwa dania"
-                                name="Nazwa"
-                                defaultValue=''
-                            />
-                        </Grid>
-                        <Grid item xs={3}  spacing={2}>
-                            <TextField
-                                required id="standard-basic"
-                                label="Cena"
-                                name="Cena"
-                                defaultValue=''
-                            />
-                        </Grid>
-                        <Grid item xs={3} spacing={2}>
-                            <TextField
-                                id="standard-multiline-static"
-                                label="Składniki"
-                                multiline
-                                rows={4}
-                            />
-                        </Grid>
-                        <div>
-                            <Tooltip title="Dodaj" aria-label="add">
-                                <Fab color="default" size="small" type="submit">
-                                    <AddIcon />
-                                </Fab>
-                            </Tooltip>
-                        </div>
-                        </Grid>
-                        </form>
-                        </div>
-                    </Paper>
+                    <div align="center">
+                        <TextField
+                            required id="standard-basic"
+                            label="Nazwa dania"
+                            name="Nazwa"
+                            value={nazwadania}
+                            className={classes.spejsing}
+                            onChange={(e) => setDanie(e.target.value)}
+                        />
+                        <TextField
+                            required id="standard-basic"
+                            label="Cena"
+                            name="Cena"
+                            value={cena}
+                            className={classes.spejsing}
+                            onChange={(e) => setCena(e.target.value)}
+                        />
+                        <TextField
+                            id="standard-multiline-static"
+                            label="Składniki"
+                            multiline
+                            rows={4}
+                            value={skladniki}
+                            className={classes.spejsing}
+                            onChange={(e) => setSkladniki(e.target.value)}
+                        />
+                    <div>
+                        <Tooltip title="Dodaj" aria-label="add">
+                            <Fab color="default" size="small" type="submit">
+                                <AddIcon />
+                            </Fab>
+                        </Tooltip>
+                    </div>
+                    </div>
+                    </form>
                     <div align='center'>
                         <Button variant="contained" className={classes.button} type="submit"> Dodaj  </Button>
                     </div>
-                    </form>
-                </Paper>
-            </Grid>
-        </form>
+            </div>
+        </Grid>
     );
 };

@@ -80,7 +80,6 @@ export default function ButtonAppBar() {
         </AppBar>
         <Container>
           <Switch>
-            
             <Route path={dodanierestauracji} component={DodanieRestauracji} />
             <Route path={ glowna } component = { MainPage }/>
           </Switch>

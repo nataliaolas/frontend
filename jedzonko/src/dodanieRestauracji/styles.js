@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import food from '../api/apiClient';
 
  const useStyles = makeStyles((theme) => ({
     napis:
@@ -18,6 +19,7 @@ import { makeStyles } from "@material-ui/core";
         top:'100px',
         width: '900px',
         height: '800px',
+        backgroundImage: `url(${food})`
     },
     button: {
         backgroundColor: '#f09559',
@@ -48,6 +50,9 @@ import { makeStyles } from "@material-ui/core";
         margin: theme.spacing(2),
         color: '#f09559',
         align:'right'
+    },
+    spejsing:{
+        margin:theme.spacing(4)
     }
 }));
  export default useStyles;
