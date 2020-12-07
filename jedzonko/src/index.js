@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import ButtonAppBar from '../src/components/layout/Layout';
+import App from './App';
+import SimpleMenu from './components/menu/menu'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
