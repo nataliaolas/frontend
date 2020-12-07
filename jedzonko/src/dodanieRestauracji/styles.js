@@ -15,10 +15,9 @@ import { makeStyles } from "@material-ui/core";
     root: {
         margin: 'auto',
         position: 'relative',
-        top: '100px',
-        left: '100px',
-        width: '800px',
-        height: '800px'
+        top:'100px',
+        width: '900px',
+        height: '800px',
     },
     button: {
         backgroundColor: '#f09559',

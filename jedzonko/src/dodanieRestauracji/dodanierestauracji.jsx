@@ -6,16 +6,18 @@ import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import { useForm } from "react-hook-form";
 
 export default function DodanieRestauracji() {
     const classes = useStyles();
-
+    const { handleSubmit } = useForm();
+    const onSubmit = data => console.log(data);
 
     return (
         <form >
             <Grid container spacing={3}>
                 <Paper className={classes.root}>
+                <form >
                     <div className={classes.napis}>Dodanie restauracji</div>
                     <Paper outlined={3}>
                         <div align="center">
@@ -63,20 +65,48 @@ export default function DodanieRestauracji() {
                     </Paper>
                     <div className={classes.napis}>Dodanie MENU</div>
                     <Paper outlined={3}>
-                        <Typography> xddddd</Typography>
+                        <div align="center">
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                        <Grid direction="row" xs={12}>
+                        <Grid item xs={3} spacing={2}>
+                            <TextField
+                                required id="standard-basic"
+                                label="Nazwa dania"
+                                name="Nazwa"
+                                defaultValue=''
+                            />
+                        </Grid>
+                        <Grid item xs={3}  spacing={2}>
+                            <TextField
+                                required id="standard-basic"
+                                label="Cena"
+                                name="Cena"
+                                defaultValue=''
+                            />
+                        </Grid>
+                        <Grid item xs={3} spacing={2}>
+                            <TextField
+                                id="standard-multiline-static"
+                                label="Składniki"
+                                multiline
+                                rows={4}
+                            />
+                        </Grid>
                         <div>
                             <Tooltip title="Dodaj" aria-label="add">
-                                <Fab color="default" size="small">
+                                <Fab color="default" size="small" type="submit">
                                     <AddIcon />
                                 </Fab>
                             </Tooltip>
                         </div>
-
-
+                        </Grid>
+                        </form>
+                        </div>
                     </Paper>
                     <div align='center'>
                         <Button variant="contained" className={classes.button} type="submit"> Dodaj  </Button>
                     </div>
+                    </form>
                 </Paper>
             </Grid>
         </form>
