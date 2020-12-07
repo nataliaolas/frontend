@@ -5,11 +5,13 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2),
         width: '80ch',
         margin: 'auto',
-        position: 'absolute',
+        position: 'relative',
+        align:'center',
+        top:'150px'
     },
     napis:
     {
-      color: '#190423',
+      color: '#feb236',
       margin: theme.spacing(2),
       width: '25ch',
       margin: 'auto',
@@ -26,11 +28,12 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center'
     },
     button: {
-      backgroundColor: '#190423',
+      backgroundColor: '#feb236',
+      position:'abolute',
+      left:'200px',
       margin: theme.spacing(2),
-      color: 'white',
-      fontSize: '18px',
-      textAlign:'center'
+      fontSize: '20px',
+      align:'center'
     },
 }));
 

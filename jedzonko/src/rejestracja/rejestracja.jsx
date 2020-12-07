@@ -9,7 +9,7 @@ export default function Rejestracja() {
             <Grid container>
                 <Paper>
                     <div className={classes.napis}> Rejestracja konta </div>
-                    <div textAlign="center">
+                    <div >
                         <TextField required id="standard-basic" className={classes.textField} label="Imię" name="imie" />
                         <TextField required id="standard-basic" className={classes.textField} label="Nazwisko" name="nazwisko" />
                         <TextField required id="standard-basic" className={classes.textField} label="E-mail" name="email" />
@@ -18,7 +18,7 @@ export default function Rejestracja() {
                         <TextField required id="standard-basic" className={classes.textField} label="Numer telefonu" name="numertelefonu" />
                     </div>
                     <div>
-                        <Button variant="contained"  type="submit" textAlign="center"> Zarejestruj konto </Button>
+                        <Button variant="contained"  type="submit" align="center" className={classes.button}> Zarejestruj konto </Button>
                     </div>
                 </Paper>
             </Grid>
