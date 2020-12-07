@@ -8,8 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container } from '@material-ui/core';
-import { Home } from "../../paths/Routs";
+import { Home,Kroki } from "../../paths/Routs";
 import MainPage from "./Home"; 
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,6 +80,7 @@ export default function ButtonAppBar() {
         </AppBar>
         <Container>
           <Switch>
+            {/* <Route path={Kroki} component={KrokiZamowienia} /> */}
             <Route path={ Home } component = { MainPage }/>
           </Switch>
         </Container>        

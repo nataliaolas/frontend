@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Formularz from './formularzZamowienia';
 import { Paper } from '@material-ui/core';
+import SimpleMenu from '../menu/menu';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -27,7 +29,7 @@ function getSteps() {
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return 'miejsce na menu';
+      return <SimpleMenu/>;
     case 1:
       return <Formularz/>;
     case 2:
