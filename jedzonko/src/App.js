@@ -4,7 +4,7 @@ import Rejestracja from './rejestracja/rejestracja';
 
 function App() {
   return (
-    <Rejestracja />
+    <p>trololo</p>
   );
 }
 
