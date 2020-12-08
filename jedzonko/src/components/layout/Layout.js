@@ -76,7 +76,7 @@ export default function ButtonAppBar() {
               <FastfoodIcon />
             Jedzonko.pl
           </Typography>           
-            <Button color="inherit" onClick={}>Login</Button>
+            <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
         <Container>
