@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import layout from '../src/components/Layout';
 import reportWebVitals from './reportWebVitals';
+import Restauracje from '../src/components/restauracja/restauracje';
 
 ReactDOM.render(
   <React.StrictMode>
-  <Layout>
-    {/* tutaj będą wszystkie nasze widoczki */}
-  </Layout>
+    <Restauracje>
+
+    </Restauracje>
   </React.StrictMode>,
   document.getElementById('root')
 );
