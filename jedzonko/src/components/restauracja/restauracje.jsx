@@ -12,6 +12,13 @@ import food3 from '../../images/food3.jpg';
 import food4 from '../../images/food4.jpg';
 import food5 from '../../images/food5.jpg';
 import food6 from '../../images/food6.jpg';
+import czewa from '../../images/czewa.jpg';
+import wawa from '../../images/wawa.jpg';
+import kato from '../../images/kato.jpg';
+import krk from '../../images/krk.jpg';
+import wro from '../../images/wro.jpg';
+import gdak from '../../images/gdak.jpg';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +71,49 @@ const tileData = [
   
 
 ];
-export default function TitlebarGridList() {
+const miasta = [
+
+  {
+    img: czewa,
+   title: 'Częstochowa',
+   cols: 2,
+  },
+  {
+   img: wawa,
+   title: 'Warszawa',
+   cols: 2,   
+  },
+  {
+   img: kato,
+   title: 'Katowice',
+   cols: 2,   
+  },
+  {
+    img: krk,
+    title: 'Kraków',
+    cols: 2,   
+   },
+   {
+    img: wro,
+    title: 'Wrocław',
+    cols: 2,   
+   },
+   {
+    img: gdak,
+    title: 'Gdańsk',
+    cols: 2,   
+   },
+  
+
+
+
+
+
+
+
+    
+];
+export default function WidokRestauracji() {
   const classes = useStyles();
 
   return (
@@ -86,6 +135,24 @@ export default function TitlebarGridList() {
           </GridListTile>
         ))}
       </GridList>
+      <GridList cellHeight={180} className={classes.gridList}>
+        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+        </GridListTile>
+        {miasta.map((tile) => (
+          <GridListTile key={tile.img}>
+            <img src={tile.img} alt={tile.title} />
+            <GridListTileBar
+              title={tile.title}
+              actionIcon={
+                <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
+                  <InfoIcon />
+                </IconButton>
+              }
+            />
+          </GridListTile>
+        ))}
+      </GridList>
     </div>
+    
   );
 }
