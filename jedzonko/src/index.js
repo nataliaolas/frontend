@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import ButtonAppBar from '../src/components/layout/Layout';
 import reportWebVitals from './reportWebVitals';
 import Restauracje from '../src/components/restauracja/restauracje';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Restauracje>
-
-    </Restauracje>
+  <ButtonAppBar>
+    {/*tu bedo wszystkie rzeczy*/}
+  </ButtonAppBar>
   </React.StrictMode>,
   document.getElementById('root')
 );
