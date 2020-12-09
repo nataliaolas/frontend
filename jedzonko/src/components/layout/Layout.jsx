@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container } from '@material-ui/core';
 import { Home,Kroki } from "../../paths/Routs";
 import MainPage from "./Home"; 
-
+import KrokiZamowienia from "../FormularzZamowienia/krokiZamowienia";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,7 +80,7 @@ export default function ButtonAppBar() {
         </AppBar>
         <Container>
           <Switch>
-            {/* <Route path={Kroki} component={KrokiZamowienia} /> */}
+            <Route path={Kroki} component={KrokiZamowienia} />
             <Route path={ Home } component = { MainPage }/>
           </Switch>
         </Container>        

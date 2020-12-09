@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import SimpleMenu from './components/menu/menu'
 import reportWebVitals from './reportWebVitals';
+import ButtonAppBar from '../src/components/layout/Layout';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -2,8 +2,8 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { Grid, TextField, Paper, Typography } from '@material-ui/core';
 import useStyles from './styles';
+import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
 
 const schema = yup.object().shape({
     miejscowosc: yup.string().required(),
@@ -15,7 +15,7 @@ const schema = yup.object().shape({
 export default function Formularz() {
     const classes = useStyles();
     const { register, handleSubmit } = useForm({
-        resolver: yupResolver(schema),
+         resolver: yupResolver(schema),
     })
     return (
         <form onSubmit={handleSubmit(d => console.log(d))}>
