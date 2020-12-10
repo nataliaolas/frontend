@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -15,10 +15,19 @@ import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import apiClient from '../../api/apiClient';
+import { useHistory, useParams } from 'react-router-dom';
 
 export default function PodgladRestauracji() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState();
+  const { restauracjaid } = useParams();
+
+  const getRestauracja = async (restauracjaid) => {
+    const response = await apiClient.get(`http://127.0.0.1:8000/restauracja/${restauracjaid}`);
+    return response.data;
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,6 +36,16 @@ export default function PodgladRestauracji() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    async function fetchData() {
+        const response = await getRestauracja(restauracjaid);
+        setData(response);
+    }
+    fetchData();
+}, []);
+console.log("nazwa",data ? data.nazwa : "ładowanie");
+console.log("nazwa",data ? data.opis : "ładowanie");
   return (
     <Container>
       <Grid align="center" className={classes.gridy}>
@@ -34,7 +53,8 @@ export default function PodgladRestauracji() {
         <Button className={classes.buttonss}>Wyszukaj</Button>
       </Grid>
       <Grid item xs={12} className={classes.gridy}>
-        <Typography variant="h4">Nazwa restauracji</Typography>
+        <Typography variant="h4" name="nazwa">{data ? data.nazwa : "ładowanie"}</Typography>
+        <Typography variant="body2" gutterBottom>{data ? data.opis : "ładowanie"}</Typography>
         <Rating name="read-only" value={4} readOnly />
         <Button onClick={handleClickOpen}>Zobacz Opinie</Button>
         <Dialog
