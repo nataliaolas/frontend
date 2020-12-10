@@ -60,7 +60,7 @@ console.log("zdjecie odpowiedzi: ", data ? data[0].zdjecie : "trollo");
           <Box component="fieldset" mb={3} borderColor="transparent">
         <Rating
           name="customized-empty"
-          defaultValue={1}
+          defaultValue={3.5}
           precision={0.5}
           readOnly
           emptyIcon={<StarBorderIcon fontSize="inherit" />}
