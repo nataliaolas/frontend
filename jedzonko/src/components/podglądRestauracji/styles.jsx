@@ -7,7 +7,12 @@ const useStyles = makeStyles((theme) => ({
     },
     gridy:{
         margin:theme.spacing(4)
-    }
+    },
+    root: {
+        width: '100%',
+        minWidth: 275,
+        marginBottom: 12,
+    },
 }));
 
 
