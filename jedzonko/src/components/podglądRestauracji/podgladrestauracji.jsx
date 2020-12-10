@@ -17,6 +17,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import apiClient from '../../api/apiClient';
 import { useHistory, useParams } from 'react-router-dom';
+import getRestauracja from './method';
 
 export default function PodgladRestauracji() {
   const classes = useStyles();
@@ -24,11 +25,7 @@ export default function PodgladRestauracji() {
   const [data, setData] = React.useState();
   const { restauracjaid } = useParams();
 
-  const getRestauracja = async (restauracjaid) => {
-    const response = await apiClient.get(`http://127.0.0.1:8000/restauracja/${restauracjaid}`);
-    return response.data;
-  };
-
+ 
   const handleClickOpen = () => {
     setOpen(true);
   };
