@@ -18,6 +18,8 @@ import CardContent from '@material-ui/core/CardContent';
 import apiClient from '../../api/apiClient';
 import { useHistory, useParams } from 'react-router-dom';
 import getRestauracja from './method';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import IconButton from '@material-ui/core/IconButton';
 
 export default function PodgladRestauracji() {
   const classes = useStyles();
@@ -50,8 +52,8 @@ console.log("nazwa",data ? data.opis : "ładowanie");
         <Button className={classes.buttonss}>Wyszukaj</Button>
       </Grid>
       <Grid item xs={12} className={classes.gridy}>
-        <Typography variant="h4" name="nazwa">{data ? data.nazwa : "ładowanie"}</Typography>
-        <Typography variant="body2" gutterBottom>{data ? data.opis : "ładowanie"}</Typography>
+        <Typography variant="h4" name="nazwa">Pizzeria Felicita</Typography>
+        <Typography variant="body2" gutterBottom>Bardzo tania pizza włoska ze wspaniała atmosfera</Typography>
         <Rating name="read-only" value={4} readOnly />
         <Button onClick={handleClickOpen}>Zobacz Opinie</Button>
         <Dialog
@@ -105,7 +107,11 @@ console.log("nazwa",data ? data.opis : "ładowanie");
     </Typography>
             </CardContent>
           </Card>
+          <IconButton aria-label="add" size="x-large">
+          <AddShoppingCartIcon fontSize="inherit" />
+        </IconButton>
         </Paper>
+
       </div>
     </Container>
 
