@@ -35,17 +35,17 @@ const useStyles = makeStyles((theme) => ({
     },
 
     koszyk: {
-        left: '90%',
+        left: '70%',
         [theme.breakpoints.between('sm', 'md')]: {
-            left: '70%'
+            left: '40%'
         },
         [theme.breakpoints.down('sm')]: {
-            left: '50%'
+            left: '30%'
         },
         [theme.breakpoints.between('xs', 'sm')]: {
-            left: '60%'
+            left: '40%'
         },
-        bottom: 90
+        bottom: 70
     },
 }));
 
@@ -58,10 +58,10 @@ export default function SimpleMenu() {
                 <Card className={classes.root}>
                     <CardContent>
                         <Typography className={classes.title} gutterBottom>
-                            Pizza z przytupem
+                            Pizza 
     </Typography>
                         <Typography className={classes.pos} color="textSecondary">
-                            Szynka 200g, kokaina 5g, ser 300g
+                            Szynka 200g,ser 300g
     </Typography>
                     </CardContent>
                     <CardActions>
@@ -71,10 +71,23 @@ export default function SimpleMenu() {
                 <Card className={classes.root}>
                     <CardContent>
                         <Typography className={classes.title} gutterBottom>
-                            Pizza z przytupem
+                            Pizza 
     </Typography>
                         <Typography className={classes.pos} color="textSecondary">
-                            Szynka 200g, kokaina 5g, ser 300g
+                            Szynka 200g, ser 300g
+    </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button className={classes.koszyk} size="small">Dodaj do koszyka</Button>
+                    </CardActions>
+                </Card>
+                <Card className={classes.root}>
+                    <CardContent>
+                        <Typography className={classes.title} gutterBottom>
+                            Burger
+    </Typography>
+                        <Typography className={classes.pos} color="textSecondary">
+                            Mieso 200g, ser 300g
     </Typography>
                     </CardContent>
                     <CardActions>
