@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import ButtonAppBar from '../src/components/layout/Layout';
 import reportWebVitals from './reportWebVitals';
+import Restauracje from '../src/components/restauracja/restauracje';
 
 ReactDOM.render(
   <React.StrictMode>

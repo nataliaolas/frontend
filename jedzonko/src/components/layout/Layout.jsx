@@ -11,6 +11,10 @@ import { Container } from '@material-ui/core';
 import { glowna,dodanierestauracji } from "../../paths/routes";
 import MainPage from './glowna';
 import DodanieRestauracji from "../../dodanieRestauracji/dodanierestauracji";
+import { Home, Restauracja,Login  } from "../../paths/Routs";
+import MainPage from "./Home"; 
+import WidokRestauracji from "../restauracja/restauracje"
+import LoginView from "../logowanie/logowanie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,6 +86,9 @@ export default function ButtonAppBar() {
           <Switch>
             <Route path={dodanierestauracji} component={DodanieRestauracji} />
             <Route path={ glowna } component = { MainPage }/>
+            <Route path={ Restauracja } component = { WidokRestauracji } />
+            <Route path={ Login } component = { LoginView }/>
+            <Route path={ Home } component = { MainPage }/>          
           </Switch>
         </Container>        
       </div>
