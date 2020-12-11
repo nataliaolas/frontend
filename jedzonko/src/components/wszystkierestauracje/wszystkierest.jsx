@@ -12,6 +12,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import Box from '@material-ui/core/Box';
 import apiClient from '../api/apiClient';
 import Grid from '@material-ui/core/Grid';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -72,9 +73,11 @@ console.log("zdjecie odpowiedzi: ", data ? data[0].zdjecie : "trollo");
         </CardContent>
       </CardActionArea>
       <CardActions>
+      <Link to={`/danarestauracja`}>
         <Button size="small">
-         Zobacz ofertę
+         Zobacz ofertę 
         </Button>
+        </Link> 
       </CardActions>
     </Card>
     </Grid>

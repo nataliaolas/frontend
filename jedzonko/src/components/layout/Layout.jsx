@@ -9,9 +9,7 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container } from '@material-ui/core';
 import { Home,Wszystkie,Restauracja,Login,Restauracji } from "../../paths/Routs";
-import MainPage from "./Home"; 
 import WszystkieRestauracje from "../wszystkierestauracje/wszystkierest";
-import MainPage from "./Home"; 
 import WidokRestauracji from "../restauracja/restauracje"
 import LoginView from "../logowanie/logowanie";
 import MainPage from "./Home"; 
