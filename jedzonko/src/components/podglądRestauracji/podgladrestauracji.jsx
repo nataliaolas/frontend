@@ -17,18 +17,19 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import apiClient from '../../api/apiClient';
 import { useHistory, useParams } from 'react-router-dom';
-import getRestauracja from './method';
+// import getRestauracja from './method';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from "react-router-dom";
+// import getMenu from './method';
 
 export default function PodgladRestauracji() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState();
+  const [data1, setData1] = React.useState();
   const { restauracjaid } = useParams();
-
- 
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -37,16 +38,40 @@ export default function PodgladRestauracji() {
     setOpen(false);
   };
 
+  const getRestauracja = async (restauracjaid) => {
+    const response = await apiClient.get(`http://127.0.0.1:8000/restauracja/${restauracjaid}`);
+    return response.data;
+  };
+  
+  const getMenu = async (restauracjaid) => {
+    const response = await apiClient.get(`http://127.0.0.1:8000/menu/${restauracjaid}`);
+    return response.data1;
+  };
+
   useEffect(() => {
     async function fetchData() {
         const response = await getRestauracja(restauracjaid);
         setData(response);
     }
+    async function fetchData1() {
+      const response = await getMenu(restauracjaid);
+      setData1(response);
+  }
     fetchData();
+    fetchData1();
 }, []);
+
+// useEffect(() => {
+//   async function fetchData1() {
+//       const response = await getMenu(restauracjaid);
+//       setData1(response);
+//   }
+//   fetchData1();
+// }, []);
 
 console.log("nazwa",data ? data.nazwa : "ładowanie");
 console.log("nazwa",data ? data.opis : "ładowanie");
+console.log("nazwa",data1 ? data1.nazwa : "ładowanie");
   return (
     <Container>
       <Grid align="center" className={classes.gridy}>
@@ -83,19 +108,21 @@ console.log("nazwa",data ? data.opis : "ładowanie");
       <div className={classes.root}>
         <Paper>
           <Typography className={classes.menutitle} component="h1"> Menu restauracji</Typography>
-          <Card className={classes.root}>
+          {data1 ? data1.map((pozycja) => (
+          <Card className={classes.root} key={pozycja.id} value={pozycja}>
             <CardContent>
-              <Typography className={classes.title} gutterBottom>
-                Pizza
+              <Typography className={classes.title} name="nazwa" gutterBottom>
+              {pozycja.nazwa}
     </Typography>
-              <Typography className={classes.title} variant="overline" display="block" gutterBottom>
-               25 zł
+              <Typography className={classes.title} variant="overline" display="block" name="cena" gutterBottom>
+               {pozycja.cena}
     </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                Szynka 200g, ser 300g
+              <Typography className={classes.pos} name="pozycja" color="textSecondary">
+                {pozycja.sklad}
     </Typography>
             </CardContent>
           </Card>
+          )):"ładowanie"}
           <Link to={`/zamowienie`}>
           <IconButton aria-label="add" size="large">
           <AddShoppingCartIcon fontSize="inherit" />
