@@ -45,7 +45,7 @@ export default function PodgladRestauracji() {
   
   const getMenu = async (restauracjaid) => {
     const response = await apiClient.get(`http://127.0.0.1:8000/menu/${restauracjaid}`);
-    return response.data1;
+    return response.data;
   };
 
   useEffect(() => {
@@ -53,25 +53,27 @@ export default function PodgladRestauracji() {
         const response = await getRestauracja(restauracjaid);
         setData(response);
     }
-    async function fetchData1() {
+    // async function fetchData1() {
+    //   const response = await getMenu(restauracjaid);
+    //   setData1(response);
+  // }
+    fetchData();
+    // fetchData1();
+}, []);
+
+useEffect(() => {
+  async function fetchData1() {
       const response = await getMenu(restauracjaid);
       setData1(response);
   }
-    fetchData();
-    fetchData1();
+  fetchData1();
 }, []);
-
-// useEffect(() => {
-//   async function fetchData1() {
-//       const response = await getMenu(restauracjaid);
-//       setData1(response);
-//   }
-//   fetchData1();
-// }, []);
 
 console.log("nazwa",data ? data.nazwa : "ładowanie");
 console.log("nazwa",data ? data.opis : "ładowanie");
-console.log("nazwa",data1 ? data1.nazwa : "ładowanie");
+console.log("----------------");
+console.log("data1: ", data1);
+console.log("----------------");
   return (
     <Container>
       <Grid align="center" className={classes.gridy}>
@@ -108,7 +110,7 @@ console.log("nazwa",data1 ? data1.nazwa : "ładowanie");
       <div className={classes.root}>
         <Paper>
           <Typography className={classes.menutitle} component="h1"> Menu restauracji</Typography>
-          {data1 ? data1.map((pozycja) => (
+          {data1 ? data1.pozycje.map((pozycja) => (
           <Card className={classes.root} key={pozycja.id} value={pozycja}>
             <CardContent>
               <Typography className={classes.title} name="nazwa" gutterBottom>
