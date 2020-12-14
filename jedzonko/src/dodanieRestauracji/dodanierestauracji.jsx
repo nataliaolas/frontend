@@ -135,6 +135,7 @@ export default function DodanieRestauracji() {
                      <form onSubmit={handleSubmit(handleChange1)}>                      
                     <div className={classes.napis}>Dodanie MENU</div>
                     <div align="center">
+                        <Paper outlined={3}>
                         <TextField
                             required id="standard-basic"
                             label="Nazwa dania"
@@ -160,6 +161,7 @@ export default function DodanieRestauracji() {
                             className={classes.spejsing}
                             onChange={(e) => setSkladniki(e.target.value)}
                         />
+                        </Paper>
                     <div>
                         <Tooltip title="Dodaj" aria-label="add">
                             <Fab color="default" size="small" type="submit">
