@@ -29,6 +29,7 @@ export default function WszystkieRestauracje() {
   const classes = useStyles();
   const [data, setData] = useState();
 
+  
   useEffect(() => {
     const ListaRestauracji = async () => {
         const response = await apiClient.get(`http://127.0.0.1:8000/restauracja/`);
@@ -73,7 +74,7 @@ console.log("zdjecie odpowiedzi: ", data ? data[0].zdjecie : "trollo");
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Link to={`/danarestauracja`}>
+      <Link to={`/danarestauracja/${restauracja.id}`}>
         <Button size="small">
          Zobacz ofertę 
         </Button>
