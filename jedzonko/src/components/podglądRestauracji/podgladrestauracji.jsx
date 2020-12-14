@@ -17,11 +17,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import apiClient from '../../api/apiClient';
 import { useHistory, useParams } from 'react-router-dom';
-// import getRestauracja from './method';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from "react-router-dom";
-// import getMenu from './method';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export default function PodgladRestauracji() {
   const classes = useStyles();
@@ -29,7 +28,8 @@ export default function PodgladRestauracji() {
   const [data, setData] = React.useState();
   const [data1, setData1] = React.useState();
   const { restauracjaid } = useParams();
-  
+  const history = useHistory();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -76,6 +76,7 @@ console.log("data1: ", data1);
 console.log("----------------");
   return (
     <Container>
+      <Button color="secondary" onClick={() => history.goBack()} className={classes.back}> <ArrowBackIcon > </ArrowBackIcon>Wróć do widoku wszystkich restauracji </Button>
       <Grid align="center" className={classes.gridy}>
         <TextField id="standard-search" label="Wyszukaj danie" type="search" />
         <Button className={classes.buttonss}>Wyszukaj</Button>
@@ -125,8 +126,9 @@ console.log("----------------");
             </CardContent>
           </Card>
           )):"ładowanie"}
-          <Link to={`/zamowienie`}>
+          <Link to={`/zamowienie/${restauracjaid}`}>
           <IconButton aria-label="add" size="large">
+            Przejdź do złożenia zamówienia
           <AddShoppingCartIcon fontSize="inherit" />
         </IconButton>
         </Link>

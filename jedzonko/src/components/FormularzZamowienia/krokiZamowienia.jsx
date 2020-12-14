@@ -8,6 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import Formularz from './formularzZamowienia';
 import { Paper } from '@material-ui/core';
 import SimpleMenu from '../menu/menu';
+import MainPage from '../layout/Home';
+import Platnosc from './Platnosc';
+import { useHistory } from 'react-router-dom';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,14 +38,15 @@ function getStepContent(stepIndex) {
     case 1:
       return <Formularz/>;
     case 2:
-      return 'platnosc';
+      return <Platnosc/>;
     default:
-      return 'głowny widok?';
+      return <MainPage/>;
   }
 }
 
 export default function KrokiZamowienia() {
   const classes = useStyles();
+  const history = useHistory();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
@@ -58,6 +64,7 @@ export default function KrokiZamowienia() {
 
   return (
     <div className={classes.root}>
+            <Button color="secondary" onClick={() => history.goBack()} className={classes.back}> <ArrowBackIcon > </ArrowBackIcon>Wróć do widoku restauracji </Button>
       <Paper elevation={3}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
@@ -82,10 +89,10 @@ export default function KrokiZamowienia() {
                 className={classes.backButton}
                 type="submit"
               >
-                Back
+                Powrót
               </Button>
               <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {activeStep === steps.length - 1 ? 'Koniec' : 'Następny'}
               </Button>
             </div>
           </div>
