@@ -85,7 +85,7 @@ console.log("----------------");
         <Typography variant="h4" name="nazwa">{data ? data.nazwa : "ładowanie"}</Typography>
         <Typography variant="body2" gutterBottom>{data ? data.opis : "ładowanie"}</Typography>
         <Rating name="read-only" value={4} readOnly />
-        <Button onClick={handleClickOpen}>Zobacz Opinie</Button>
+        <Button onClick={handleClickOpen} className={classes.buton}>Zobacz Opinie</Button>
         <Dialog
           open={open}
           onClose={handleClose}
@@ -110,7 +110,7 @@ console.log("----------------");
       </Grid>
       <div className={classes.root}>
         <Paper>
-          <Typography className={classes.menutitle} component="h1"> Menu restauracji</Typography>
+          <Typography component="h1" variant="h6" className={classes.napis}> Menu restauracji</Typography>
           {data1 ? data1.pozycje.map((pozycja) => (
           <Card className={classes.root} key={pozycja.id} value={pozycja}>
             <CardContent>
@@ -127,7 +127,7 @@ console.log("----------------");
           </Card>
           )):"ładowanie"}
           <Link to={`/zamowienie/${restauracjaid}`}>
-          <IconButton aria-label="add" size="large">
+          <IconButton aria-label="add" size="large" className={classes.napis}>
             Przejdź do złożenia zamówienia
           <AddShoppingCartIcon fontSize="inherit" />
         </IconButton>

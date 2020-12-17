@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
     },
     menutitle: {
         fontSize: 24,
-        textAlign: 'center'
+        textAlign: 'center',
+        color:'#ffa733'
     },
     title: {
         fontSize: 24,

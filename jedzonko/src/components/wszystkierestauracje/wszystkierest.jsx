@@ -13,6 +13,7 @@ import Box from '@material-ui/core/Box';
 import apiClient from '../api/apiClient';
 import Grid from '@material-ui/core/Grid';
 import { Link } from "react-router-dom";
+import Filtr from '../layout/Filtr';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,10 +43,16 @@ export default function WszystkieRestauracje() {
 }, []);
 
 
+const Filtruj = (data) =>{
+  setData(data);
+}
 
 console.log("zdjecie odpowiedzi: ", data ? data[0].zdjecie : "trollo");
   return (
       <Grid container>
+         <Grid item xs={12}>
+                <Filtr parentCallBack ={(data)=>Filtruj(data)} />
+            </Grid>
     {data ? data.map((restauracja) => (
     <Grid item xs={6} key={restauracja.id} value={restauracja} className={classes.root}>
     <Card className={classes.root}>

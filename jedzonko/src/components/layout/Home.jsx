@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Button } from '@material-ui/core';
 import WidokRestauracji from "../restauracja/restauracje"
+import apiClient from '../../api/apiClient';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -67,13 +68,29 @@ const useStyles = makeStyles((theme) => ({
 export default function MainPage() {
 
     const classes = useStyles();
+    const[data,setData] = React.useState();
+    const[miasto,setMiasto] = React.useState("");
 
-    const [cuisine, setCuisine] = React.useState('');
+    
 
-    const handleChange = (event) => {
-        setCuisine(event.target.value);
-    };
+    useEffect(() => {
+        const TypyRestauracji = async () => {
+            const response = await apiClient.get(`http://127.0.0.1:8000/typrestauracji/`);
+            console.log("Odpowiedz", response.data);
+            setData(response.data);
+            return response.data;
+        }
+        const restauracje = TypyRestauracji();
+    }, []);
 
+    const MiastoFiltr = async (miasto) => {
+        const response = await apiClient.get(`http://127.0.0.1:8000/adres/?miasto=${miasto}`);
+        console.log("response:",response.data);
+      };
+
+      const handleMiastoChange = (event) => {
+        setMiasto(event.target.value);
+      };
     return (
         <div className={classes.root}>
             <Grid className={classes.grid} container spacing={1} >
@@ -84,7 +101,9 @@ export default function MainPage() {
                                 <SearchIcon />
                             </div>
                             <InputBase
-                                placeholder="Miasto, np. Częstochowa"
+                                placeholder="Miasto"
+                                value={miasto} 
+                                onChange={handleMiastoChange}
                                 classes={{
                                     root: classes.inputRoot,
                                     input: classes.inputInput,
@@ -97,19 +116,17 @@ export default function MainPage() {
                 <Grid item xs={2}>
                     <Paper className={classes.paper}>
                         <FormControl className={classes.margin}>
-                            <Select className={classes.select} value={cuisine} onChange={handleChange} autoWidth>
-                                <MenuItem value=""><em>Wszystkie Kuchnie</em></MenuItem>
-                                <MenuItem value={"Kuchnia Polska"}>Kuchnia Polska</MenuItem>
-                                <MenuItem value={"Kuchnia Azjatycka"}>Kuchnia Azjatycka</MenuItem>
-                                <MenuItem value={"Kuchnia Włoska"}>Kuchnia Włoska</MenuItem>
-                                <MenuItem value={"Kuchnia DŁUGICH NAZW DAN"}>Kuchnia DŁUGICH NAZW DAN</MenuItem>
+                            <Select className={classes.select}  autoWidth>
+                                {data?.map((typ) => (
+                                        <MenuItem key={typ.id} value={typ.id} >{typ.nazwa}</MenuItem>
+                                    ))}
                             </Select>
                         </FormControl>
                     </Paper>
                 </Grid>
                 <Grid item xs={0}>
                     <Paper className={classes.paper}>
-                        <Button className={classes.button}>
+                        <Button className={classes.button}  onClick={() => MiastoFiltr(miasto)}>
                             Wyszukaj
                         </Button>
                     </Paper>
@@ -118,11 +135,6 @@ export default function MainPage() {
             </Grid>
         <Grid className={classes.grid} container spacing={1}>
               <WidokRestauracji></WidokRestauracji>                      
-
-
-
-
-
 
         </Grid>
         </div>

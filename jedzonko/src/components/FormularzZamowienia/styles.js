@@ -6,7 +6,9 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(4),
         margin: 'auto',
         position: 'relative',
-        left: '260px'
+        left: '260px',
+        height:'150px',
+        widht:'300px'
     },
     poszczegolnegridy: {
         margin: theme.spacing(2)
@@ -18,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
         left: '110px'
     },
     napis: {
-        textAlign: 'center'
-    }
+        textAlign: 'center',
+        color:'#ffa733'
+    },
 }));
 export default useStyles;

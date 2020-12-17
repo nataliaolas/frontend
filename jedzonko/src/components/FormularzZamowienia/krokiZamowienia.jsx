@@ -12,7 +12,7 @@ import MainPage from '../layout/Home';
 import Platnosc from './Platnosc';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import Zamowienie from './Zamowienie';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,11 +20,19 @@ const useStyles = makeStyles((theme) => ({
   },
   backButton: {
     marginRight: theme.spacing(1),
+    backgroundColor:'#ffa733'
   },
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  button1:
+  {
+    backgroundColor:'#ffa733'
+  },
+  napisyczycos:{
+    color:'#ffa733'
+  }
 }));
 
 function getSteps() {
@@ -66,18 +74,18 @@ export default function KrokiZamowienia() {
     <div className={classes.root}>
             <Button color="secondary" onClick={() => history.goBack()} className={classes.back}> <ArrowBackIcon > </ArrowBackIcon>Wróć do widoku restauracji </Button>
       <Paper elevation={3}>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper activeStep={activeStep} alternativeLabel >
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel >{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>Tutaj miejsce na informacje o zamowieniu </Typography>
-            <Button onClick={handleReset}>Reset</Button>
+            <Typography className={classes.instructions}><Zamowienie/> </Typography>
+            <Button onClick={handleReset} className={classes.napisyczycos}>Reset</Button>
           </div>
         ) : (
           <div>
@@ -91,7 +99,7 @@ export default function KrokiZamowienia() {
               >
                 Powrót
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
+              <Button variant="contained" className={classes.button1} onClick={handleNext}>
                 {activeStep === steps.length - 1 ? 'Koniec' : 'Następny'}
               </Button>
             </div>
