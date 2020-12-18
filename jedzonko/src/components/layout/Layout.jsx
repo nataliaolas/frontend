@@ -8,10 +8,11 @@ import IconButton from '@material-ui/core/IconButton';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container } from '@material-ui/core';
-import { Home, Restauracja,Login  } from "../../paths/Routs";
+import { Home, Restauracja,Login,panel  } from "../../paths/Routs";
 import MainPage from "./Home"; 
 import WidokRestauracji from "../restauracja/restauracje"
 import LoginView from "../logowanie/logowanie";
+import PanelZamowien from '../panelZamowien/panZamowien';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,7 +84,8 @@ export default function ButtonAppBar() {
           <Switch>
             <Route path={ Restauracja } component = { WidokRestauracji } />
             <Route path={ Login } component = { LoginView }/>
-            <Route path={ Home } component = { MainPage }/>          
+            <Route path={panel}  component={PanelZamowien} />
+            <Route path={ Home } component = { MainPage }/>     
           </Switch>
         </Container>        
       </div>
