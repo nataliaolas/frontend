@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     koszyk: {
+        backgroundColor:'#ffa733',
         left: '70%',
         [theme.breakpoints.between('sm', 'md')]: {
             left: '40%'

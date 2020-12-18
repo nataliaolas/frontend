@@ -19,7 +19,11 @@ const useStyles = makeStyles((theme) => ({
     },
     napis:{
         color:'#ffa733'
-    }
+    },
+    media: {
+        height: 2,
+        paddingTop: '20.25%', // 16:9
+      },
 }));
 
 

@@ -21,12 +21,15 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from "react-router-dom";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import food4 from '../../images/food4.jpg';
+import CardMedia from '@material-ui/core/CardMedia';
 
 export default function PodgladRestauracji() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState();
   const [data1, setData1] = React.useState();
+  const [data2, setData2] = React.useState();
   const { restauracjaid } = useParams();
   const history = useHistory();
 
@@ -48,17 +51,17 @@ export default function PodgladRestauracji() {
     return response.data;
   };
 
+  const getOpinia = async() =>{
+    const response = await apiClient.get(`http://127.0.0.1:8000/opiniaorestauracji/`);
+    return response.data;
+  };
+
   useEffect(() => {
     async function fetchData() {
         const response = await getRestauracja(restauracjaid);
         setData(response);
     }
-    // async function fetchData1() {
-    //   const response = await getMenu(restauracjaid);
-    //   setData1(response);
-  // }
     fetchData();
-    // fetchData1();
 }, []);
 
 useEffect(() => {
@@ -69,19 +72,33 @@ useEffect(() => {
   fetchData1();
 }, []);
 
-console.log("nazwa",data ? data.nazwa : "ładowanie");
-console.log("nazwa",data ? data.opis : "ładowanie");
-console.log("----------------");
-console.log("data1: ", data1);
-console.log("----------------");
+
+useEffect(() => {
+  async function fetchData2() {
+      const response = await getOpinia();
+      setData2(response);
+  }
+  fetchData2();
+}, []);
+
+
+console.log("data2: ", data2);
   return (
     <Container>
       <Button color="secondary" onClick={() => history.goBack()} className={classes.back}> <ArrowBackIcon > </ArrowBackIcon>Wróć do widoku wszystkich restauracji </Button>
-      <Grid align="center" className={classes.gridy}>
+      {/* <Grid align="center" className={classes.gridy}>
         <TextField id="standard-search" label="Wyszukaj danie" type="search" />
         <Button className={classes.buttonss}>Wyszukaj</Button>
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} className={classes.gridy}>
+        <Card> 
+          <CardMedia
+        className={classes.media}
+        image={food4}
+        //image = {data ? data.zdjęcie : "ładowanie"}
+        name="zdjecie"
+      />
+      </Card>
         <Typography variant="h4" name="nazwa">{data ? data.nazwa : "ładowanie"}</Typography>
         <Typography variant="body2" gutterBottom>{data ? data.opis : "ładowanie"}</Typography>
         <Rating name="read-only" value={4} readOnly />
@@ -92,17 +109,20 @@ console.log("----------------");
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Opinie o restauracji:"}</DialogTitle>
+          <DialogTitle id="alert-dialog-title" className={classes.napis}>{"Opinie o restauracji:"}</DialogTitle>
           <DialogContent>
+         
             <DialogContentText id="alert-dialog-description">
-              <Grid>
-                <Rating name="read-only" value={4} readOnly />
-                <Typography>super </Typography>
+            {data2 ? data2.map((opinia) => (
+              <Grid key={opinia.id} value={opinia}>   
+                <Rating name="read-only" value={opinia.zadowolenie_klienta} readOnly />
+                <Typography>{opinia.opis} </Typography>
               </Grid>
+                 )):"ładowanie"}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary" autoFocus>
+            <Button onClick={handleClose} className={classes.napis} autoFocus>
               Wyjdź
           </Button>
           </DialogActions>
