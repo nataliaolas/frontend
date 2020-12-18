@@ -79,7 +79,8 @@ export default function ButtonAppBar() {
             <Typography variant="h6" className={classes.title}>
               <FastfoodIcon />
             Jedzonko.pl
-          </Typography>           
+          </Typography>  
+          <Button color="inherit">Zamowienia</Button>         
             <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>

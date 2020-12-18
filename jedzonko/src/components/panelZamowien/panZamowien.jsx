@@ -36,22 +36,31 @@ export default function PanelZamowien() {
             onClick={(event) => event.stopPropagation()}
             onFocus={(event) => event.stopPropagation()}
             control={<Checkbox />}
-            label="Zamowienie 1 "
+            label="Zamowienie 1"
           />
         </AccordionSummary>
         <AccordionDetails>
-          <Typography color="textSecondary">
+          <Typography className={classes.napis}>
             Zamówienie:
           </Typography>
-        </AccordionDetails>
-        <AccordionDetails>
-          <Typography color="textSecondary">
-            Adres klienta:
+          <Typography color="textSecondary" variant="h6">
+            tutaj zamowienia
           </Typography>
         </AccordionDetails>
         <AccordionDetails>
-          <Typography color="textSecondary">
+          <Typography className={classes.napis}>
+            Adres klienta:
+          </Typography>
+          <Typography color="textSecondary" variant="h6">
+            tutaj adres 
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography className={classes.napis}>
             Forma płatności oraz cena:
+          </Typography>
+          <Typography color="textSecondary" variant="h6">
+            Cena i platnosc
           </Typography>
         </AccordionDetails>
       </Accordion>
