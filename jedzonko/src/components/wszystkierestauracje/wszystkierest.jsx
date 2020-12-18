@@ -59,7 +59,7 @@ console.log("zdjecie odpowiedzi: ", data ? data[0].zdjecie : "trollo");
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          src={data ? restauracja.zdjecie : ""}
+          image ={restauracja.zdjecie}
           name="zdjecie"
         />
         <CardContent>
