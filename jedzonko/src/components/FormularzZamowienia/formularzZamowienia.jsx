@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { Grid, TextField, Paper, Typography } from '@material-ui/core';
 import useStyles from './styles';
+import apiClient from '../../api/apiClient';
+
 // import * as yup from 'yup';
 // import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -14,6 +16,12 @@ import useStyles from './styles';
 
 export default function Formularz() {
     const classes = useStyles();
+
+    const DaneKlienta = async (form) => {
+        await apiClient.post(`http://127.0.0.1:8000/klient/`, form);
+    };
+
+
     const { register, handleSubmit } = useForm({
         //  resolver: yupResolver(schema),
     })
