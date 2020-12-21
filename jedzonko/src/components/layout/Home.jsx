@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Button } from '@material-ui/core';
-import WidokRestauracji from "../restauracja/restauracje"
+import Głownastrona from "../restauracja/restauracje"
 import apiClient from '../../api/apiClient';
 
 
@@ -134,7 +134,7 @@ export default function MainPage() {
 
             </Grid>
         <Grid className={classes.grid} container spacing={1}>
-              <WidokRestauracji></WidokRestauracji>                      
+              <Głownastrona></Głownastrona>                      
 
         </Grid>
         </div>
