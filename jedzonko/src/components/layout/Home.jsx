@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Button } from '@material-ui/core';
 import Głownastrona from "../restauracja/restauracje"
 import apiClient from '../../api/apiClient';
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -126,9 +127,11 @@ export default function MainPage() {
                 </Grid>
                 <Grid item xs={0}>
                     <Paper className={classes.paper}>
+                        <Link to={`/wszystkierestauracje`}>
                         <Button className={classes.button}  onClick={() => MiastoFiltr(miasto)}>
                             Wyszukaj
                         </Button>
+                        </Link>
                     </Paper>
                 </Grid>
 
