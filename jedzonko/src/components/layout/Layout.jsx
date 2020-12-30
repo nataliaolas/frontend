@@ -80,7 +80,7 @@ export default function ButtonAppBar() {
               <FastfoodIcon />
             Jedzonko.pl
           </Typography>  
-          <Button color="inherit">Zamowienia</Button>         
+         <Link to="/zamowieniapanel"><Button color="inherit" >Zamowienia</Button> </Link>         
             <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
