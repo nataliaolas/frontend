@@ -85,7 +85,7 @@ export default function KrokiZamowienia() {
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}><Zamowienie/> </Typography>
-            <Button onClick={handleReset} className={classes.napisyczycos}>Reset</Button>
+            <Button onClick={handleReset} className={classes.napisyczycos}>Zamów ponownie</Button>
           </div>
         ) : (
           <div>
