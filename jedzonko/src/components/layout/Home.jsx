@@ -85,12 +85,14 @@ export default function MainPage() {
     }, []);
 
    const TypRestauracjiFiltr = async(nazwa) =>{
+       console.log("filtr po typie:", nazwa);
        const response = await apiClient.get(`http://127.0.0.1:8000/typrestauracji/?nazwa=${nazwa}`);
        console.log("response: ", response.data);
    };
 
 
    const handleTypChange = (event) => {
+    console.log("Handle change typu", event.target.value);
     setNazwa(event.target.value);
   };
     return (
@@ -120,7 +122,7 @@ export default function MainPage() {
                         <FormControl className={classes.margin}>
                             <Select className={classes.select}  autoWidth>
                                 {data?.map((typ) => (
-                                        <MenuItem key={typ.id} value={typ.id}  onChange={handleTypChange}>{typ.nazwa}</MenuItem>
+                                        <MenuItem key={typ.id} value={typ.id}  onChange={e => handleTypChange(e.target.value)}>{typ.nazwa}</MenuItem>
                                     ))}
                             </Select>
                         </FormControl>
