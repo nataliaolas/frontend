@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.between('xs', 'sm')]: {
             left: '40%'
         },
-        bottom: 70
+        bottom: 120
     },
 }));
 

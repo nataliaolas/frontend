@@ -101,7 +101,7 @@ console.log("data: ", data);
       </Card>
         <Typography variant="h4" name="nazwa">{data ? data.nazwa : "ładowanie"}</Typography>
         <Typography variant="body2" gutterBottom>{data ? data.opis : "ładowanie"}</Typography>
-        <Rating name="read-only" value={4} readOnly />
+        <Rating name="read-only" precision={0.5} value={data ? data.srednia_opinia_o_restauracji:"ładowanie"} readOnly />
         <Button onClick={handleClickOpen} className={classes.buton}>Zobacz Opinie</Button>
         <Dialog
           open={open}

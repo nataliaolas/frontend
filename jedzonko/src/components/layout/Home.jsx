@@ -8,8 +8,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Button } from '@material-ui/core';
-import WidokRestauracji from "../restauracja/restauracje"
+import Głownastrona from "../restauracja/restauracje"
 import apiClient from '../../api/apiClient';
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,7 +71,7 @@ export default function MainPage() {
     const classes = useStyles();
     const[data,setData] = React.useState();
     const[miasto,setMiasto] = React.useState("");
-
+    const[nazwa,setNazwa] =  React.useState("");
     
 
     useEffect(() => {
@@ -83,14 +84,15 @@ export default function MainPage() {
         const restauracje = TypyRestauracji();
     }, []);
 
-    const MiastoFiltr = async (miasto) => {
-        const response = await apiClient.get(`http://127.0.0.1:8000/adres/?miasto=${miasto}`);
-        console.log("response:",response.data);
-      };
+   const TypRestauracjiFiltr = async(nazwa) =>{
+       const response = await apiClient.get(`http://127.0.0.1:8000/typrestauracji/?nazwa=${nazwa}`);
+       console.log("response: ", response.data);
+   };
 
-      const handleMiastoChange = (event) => {
-        setMiasto(event.target.value);
-      };
+
+   const handleTypChange = (event) => {
+    setNazwa(event.target.value);
+  };
     return (
         <div className={classes.root}>
             <Grid className={classes.grid} container spacing={1} >
@@ -102,8 +104,8 @@ export default function MainPage() {
                             </div>
                             <InputBase
                                 placeholder="Miasto"
-                                value={miasto} 
-                                onChange={handleMiastoChange}
+                                // value={miasto} 
+                                // onChange={handleMiastoChange}
                                 classes={{
                                     root: classes.inputRoot,
                                     input: classes.inputInput,
@@ -118,7 +120,7 @@ export default function MainPage() {
                         <FormControl className={classes.margin}>
                             <Select className={classes.select}  autoWidth>
                                 {data?.map((typ) => (
-                                        <MenuItem key={typ.id} value={typ.id} >{typ.nazwa}</MenuItem>
+                                        <MenuItem key={typ.id} value={typ.id}  onChange={handleTypChange}>{typ.nazwa}</MenuItem>
                                     ))}
                             </Select>
                         </FormControl>
@@ -126,15 +128,17 @@ export default function MainPage() {
                 </Grid>
                 <Grid item xs={0}>
                     <Paper className={classes.paper}>
-                        <Button className={classes.button}  onClick={() => MiastoFiltr(miasto)}>
+                        <Link to={`/wszystkierestauracje`}>
+                        <Button className={classes.button}  onClick={() => TypRestauracjiFiltr(nazwa)}>
                             Wyszukaj
                         </Button>
+                        </Link>
                     </Paper>
                 </Grid>
 
             </Grid>
         <Grid className={classes.grid} container spacing={1}>
-              <WidokRestauracji></WidokRestauracji>                      
+              <Głownastrona></Głownastrona>                      
 
         </Grid>
         </div>
