@@ -51,8 +51,8 @@ export default function PodgladRestauracji() {
     return response.data;
   };
 
-  const getOpinia = async() =>{
-    const response = await apiClient.get(`http://127.0.0.1:8000/opiniaorestauracji/`);
+  const getOpinia = async(restauracjaid) =>{
+    const response = await apiClient.get(`http://127.0.0.1:8000/opiniaorestauracji/?restauracja=${restauracjaid}`);
     return response.data;
   };
 
@@ -75,14 +75,14 @@ useEffect(() => {
 
 useEffect(() => {
   async function fetchData2() {
-      const response = await getOpinia();
+      const response = await getOpinia(restauracjaid);
       setData2(response);
   }
   fetchData2();
 }, []);
 
 
-console.log("data2: ", data2);
+console.log("data: ", data);
   return (
     <Container>
       <Button color="secondary" onClick={() => history.goBack()} className={classes.back}> <ArrowBackIcon > </ArrowBackIcon>Wróć do widoku wszystkich restauracji </Button>
@@ -94,14 +94,14 @@ console.log("data2: ", data2);
         <Card> 
           <CardMedia
         className={classes.media}
-        image={food4}
-        //image = {data ? data.zdjęcie : "ładowanie"}
+        // image={food4}
+        image = {data ? data.zdjecie : "ładowanie"}
         name="zdjecie"
       />
       </Card>
         <Typography variant="h4" name="nazwa">{data ? data.nazwa : "ładowanie"}</Typography>
         <Typography variant="body2" gutterBottom>{data ? data.opis : "ładowanie"}</Typography>
-        <Rating name="read-only" value={4} readOnly />
+        <Rating name="read-only" precision={0.5} value={data ? data.srednia_opinia_o_restauracji:"ładowanie"} readOnly />
         <Button onClick={handleClickOpen} className={classes.buton}>Zobacz Opinie</Button>
         <Dialog
           open={open}

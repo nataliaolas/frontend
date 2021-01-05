@@ -45,21 +45,21 @@ export default function WszystkieRestauracje() {
 
 const Filtruj = (data) =>{
   setData(data);
+  console.log("data: ", data);
 }
 
-console.log("zdjecie odpowiedzi: ", data ? data[0].zdjecie : "trollo");
   return (
       <Grid container>
          <Grid item xs={12}>
                 <Filtr parentCallBack ={(data)=>Filtruj(data)} />
-            </Grid>
+            </Grid>           
     {data ? data.map((restauracja) => (
     <Grid item xs={6} key={restauracja.id} value={restauracja} className={classes.root}>
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          src={data ? restauracja.zdjecie : ""}
+          image ={restauracja.zdjecie}
           name="zdjecie"
         />
         <CardContent>
@@ -69,7 +69,7 @@ console.log("zdjecie odpowiedzi: ", data ? data[0].zdjecie : "trollo");
           <Box component="fieldset" mb={3} borderColor="transparent">
         <Rating
           name="customized-empty"
-          defaultValue={3.5}
+          value={restauracja.srednia_opinia_o_restauracji}
           precision={0.5}
           readOnly
           emptyIcon={<StarBorderIcon fontSize="inherit" />}
