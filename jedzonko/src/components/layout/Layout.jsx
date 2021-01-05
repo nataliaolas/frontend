@@ -9,12 +9,15 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container } from '@material-ui/core';
 import Rejestracja from '../../rejestracja/rejestracja';
-import { Home,Wszystkie,Restauracja,Login,Restauracji,Kroki,Zarejestrowanie} from "../../paths/Routs";
 import WszystkieRestauracje from "../wszystkierestauracje/wszystkierest";
 import KrokiZamowienia from "../FormularzZamowienia/krokiZamowienia";
 import MainPage from "./Home"; 
 import WidokRestauracji from "../restauracja/restauracje"
 import LoginView from "../logowanie/logowanie";
+import PanelZamowien from '../panelZamowien/panZamowien';
+import { Home,Wszystkie,Restauracja,Login,Restauracji,Kroki,panel,Zarejestrowanie} from "../../paths/Routs";
+import WszystkieRestauracje from "../wszystkierestauracje/wszystkierest";
+import KrokiZamowienia from "../FormularzZamowienia/krokiZamowienia";
 import PodgladRestauracji from "../podglądRestauracji/podgladrestauracji";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +82,8 @@ export default function ButtonAppBar() {
             <Typography variant="h6" className={classes.title}>
               <FastfoodIcon />
             Jedzonko.pl
-          </Typography>           
+          </Typography>  
+         <Link to="/zamowieniapanel"><Button color="inherit" >Zamowienia</Button> </Link>         
             <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
@@ -89,7 +93,8 @@ export default function ButtonAppBar() {
             <Route path={Wszystkie} component={WszystkieRestauracje}/>
             <Route path={Kroki} component={KrokiZamowienia} />
             <Route path={ Restauracja } component = { WidokRestauracji } />
-            <Route path={ Login } component = { LoginView }/>        
+            <Route path={ Login } component = { LoginView }/>
+            <Route path={panel}  component={PanelZamowien} />          
             <Route path={Restauracji} component={PodgladRestauracji}/>
             <Route path={ Home } component = { MainPage }/>
           </Switch>
