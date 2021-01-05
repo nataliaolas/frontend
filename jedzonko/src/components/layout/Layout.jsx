@@ -8,11 +8,14 @@ import IconButton from '@material-ui/core/IconButton';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container } from '@material-ui/core';
-import { Home,Zarejestrowanie ,Restauracja,Login} from "../../paths/Routs";
 import Rejestracja from '../../rejestracja/rejestracja';
+import { Home,Wszystkie,Restauracja,Login,Restauracji,Kroki,Zarejestrowanie} from "../../paths/Routs";
+import WszystkieRestauracje from "../wszystkierestauracje/wszystkierest";
+import KrokiZamowienia from "../FormularzZamowienia/krokiZamowienia";
 import MainPage from "./Home"; 
 import WidokRestauracji from "../restauracja/restauracje"
 import LoginView from "../logowanie/logowanie";
+import PodgladRestauracji from "../podglądRestauracji/podgladrestauracji";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appbar: {
-    backgroundColor: '#B10B31',
+    backgroundColor: '#ffa733',
   }
 }));
 
@@ -83,9 +86,12 @@ export default function ButtonAppBar() {
         <Container>
           <Switch>
             <Route path={Zarejestrowanie} component={Rejestracja}/>
+            <Route path={Wszystkie} component={WszystkieRestauracje}/>
+            <Route path={Kroki} component={KrokiZamowienia} />
             <Route path={ Restauracja } component = { WidokRestauracji } />
-            <Route path={ Login } component = { LoginView }/>
-            <Route path={ Home } component = { MainPage }/>          
+            <Route path={ Login } component = { LoginView }/>        
+            <Route path={Restauracji} component={PodgladRestauracji}/>
+            <Route path={ Home } component = { MainPage }/>
           </Switch>
         </Container>        
       </div>
