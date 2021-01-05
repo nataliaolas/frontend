@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         margin: 'auto',
         position: 'relative',
         left: '260px',
-        height:'150px',
+        height:'240px',
         widht:'300px'
     },
     poszczegolnegridy: {
@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
     napis: {
         textAlign: 'center',
         color:'#ffa733'
+    },
+    buton:{
+            backgroundColor:'#ffa733',
+            top:'65px',
+            right:'220px',
+            
     },
 }));
 export default useStyles;
