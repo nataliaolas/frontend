@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 300,
         maxWidth: 400,
     },
+    butttton:{
+        backgroundColor:'#ffa733'
+    }
 }));
 
 export default function LoginView() {
@@ -29,12 +32,14 @@ export default function LoginView() {
                     <TextField label="Username" margin="normal" InputProps={{startAdornment: <InputAdornment><AccountCircle/></InputAdornment>}}/>
                     <TextField label="Password" margin="normal" InputProps={{startAdornment: <InputAdornment><LockOpenRounded/></InputAdornment>}}/>
                     <div style={{height: 30}}/>
-                    <Button color="primary" variant="contained">
+                    <Button className={classes.butttton} variant="contained">
                         Log in
                     </Button>
                     <div style={{height: 30}}/>
                     <div>
                         Forgot your password?
+                    </div>   
+                    <div>
                     </div>                               
                 </div>
             </Grid>
