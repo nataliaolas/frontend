@@ -16,8 +16,6 @@ import WidokRestauracji from "../restauracja/restauracje"
 import LoginView from "../logowanie/logowanie";
 import PanelZamowien from '../panelZamowien/panZamowien';
 import { Home,Wszystkie,Restauracja,Login,Restauracji,Kroki,panel,Zarejestrowanie} from "../../paths/Routs";
-import WszystkieRestauracje from "../wszystkierestauracje/wszystkierest";
-import KrokiZamowienia from "../FormularzZamowienia/krokiZamowienia";
 import PodgladRestauracji from "../podglądRestauracji/podgladrestauracji";
 
 const useStyles = makeStyles((theme) => ({
