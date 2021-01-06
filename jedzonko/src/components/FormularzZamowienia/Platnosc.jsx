@@ -7,6 +7,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { withStyles } from '@material-ui/core/styles';
 import { orange } from '@material-ui/core/colors';
 import apiClient from '../api/apiClient';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 // import * as yup from 'yup';
 // import { yupResolver } from '@hookform/resolvers/yup';
@@ -33,6 +35,24 @@ export default function Platnosc() {
     const[nr_karty,setKarta] = React.useState("");
     const[termin_karty,setTermin]= React.useState("");
     const[nr_seryjny,setNumer] = React.useState("");
+    const [open, setOpen] = React.useState(false);
+
+    function Alert(props) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
     const [state, setState] = React.useState({
         checked: true,
     });
@@ -68,6 +88,11 @@ export default function Platnosc() {
                                 label="Płatność przy odbiorze"
                             />
                         </Grid>
+                        <Snackbar open={open} autoHideDuration={500} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="success">
+                                Udało się dodać informacje
+                             </Alert>
+                        </Snackbar>
                         <Typography variant="h4" variant="overline" gutterBottom>Płatność kartą</Typography>
                     </Grid>
                     <Grid className={classes.poszczegolnegridy}>
@@ -97,7 +122,7 @@ export default function Platnosc() {
                             value={nr_seryjny}
                             onChange={(e) => setNumer(e.target.value)}
                         />
-                         <Button className={classes.buton} type="submit">Zapłać </Button>
+                         <Button className={classes.buton} type="submit" onClick={handleClick}>Zapłać </Button>
                     </Grid>
                 </Paper>
             </Grid>

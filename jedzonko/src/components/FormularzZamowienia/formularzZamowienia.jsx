@@ -4,6 +4,8 @@ import { Grid, TextField, Paper, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import apiClient from '../../api/apiClient';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 // import * as yup from 'yup';
 // import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,15 +19,33 @@ import Button from '@material-ui/core/Button';
 
 export default function Formularz() {
     const classes = useStyles();
-    const[miasto,setMiasto]=React.useState("");
-    const[ulica,setUlica] = React.useState("");
-    const[nr_budynku,setBudynek]= React.useState("");
-    const[nr_mieszkania,setLokal] = React.useState("");
-    const[mail,setMail] = React.useState("");
-    const[nr_telefonu,setTelefon] = React.useState("");
+    const [miasto, setMiasto] = React.useState("");
+    const [ulica, setUlica] = React.useState("");
+    const [nr_budynku, setBudynek] = React.useState("");
+    const [nr_mieszkania, setLokal] = React.useState("");
+    const [mail, setMail] = React.useState("");
+    const [nr_telefonu, setTelefon] = React.useState("");
+    const [open, setOpen] = React.useState(false);
+
+    function Alert(props) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     const DaneKlienta = async (form) => {
-        var adres ={
+        var adres = {
             "miasto": form.miasto,
             "ulica": form.ulica,
             "nr_budynku": form.nr_budynku,
@@ -36,16 +56,16 @@ export default function Formularz() {
             "mail": form.mail,
             "nr_telefonu": form.nr_telefonu
         }
-        await apiClient.post(`http://127.0.0.1:8000/klient/`, data);       
+        await apiClient.post(`http://127.0.0.1:8000/klient/`, data);
     };
 
     const { register, handleSubmit } = useForm({
         //  resolver: yupResolver(schema),
-            mode: 'onSubmit',
+        mode: 'onSubmit',
     });
 
-    const handleChange = (form) =>{
-        
+    const handleChange = (form) => {
+
         form.miasto = miasto;
         form.ulica = ulica;
         form.nr_budynku = nr_budynku;
@@ -60,6 +80,11 @@ export default function Formularz() {
                 <Paper elevation={3} >
                     <Grid className={classes.napis}>
                         <Typography variant="h4" variant="overline" gutterBottom>Adres dostawy:</Typography>
+                        <Snackbar open={open} autoHideDuration={500} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="success">
+                                Udało się dodać informacje
+                             </Alert>
+                        </Snackbar>
                     </Grid>
                     <Grid className={classes.poszczegolnegridy}>
                         <TextField
@@ -119,7 +144,7 @@ export default function Formularz() {
                             ref={register}
                             onChange={(e) => setTelefon(e.target.value)}
                         />
-                        <Button className={classes.buton} type="submit">Dodaj adres </Button>
+                        <Button className={classes.buton} type="submit" onClick={handleClick}>Dodaj adres </Button>
                     </Grid>
                 </Paper>
             </Grid>

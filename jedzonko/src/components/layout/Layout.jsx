@@ -82,7 +82,7 @@ export default function ButtonAppBar() {
             Jedzonko.pl
           </Typography>  
          <Link to="/zamowieniapanel"><Button color="inherit" >Zamowienia</Button> </Link>         
-            <Button color="inherit">Login</Button>
+          <Link to="/logowanie"> <Button color="inherit">Login</Button> </Link>  
           </Toolbar>
         </AppBar>
         <Container>
