@@ -4,7 +4,7 @@ import food from '../api/apiClient';
  const useStyles = makeStyles((theme) => ({
     napis:
     {
-        color: '#f09559',
+        color: '#ffa733',
         margin: theme.spacing(6),
         width: '25ch',
         margin: 'auto',
@@ -22,14 +22,14 @@ import food from '../api/apiClient';
         backgroundImage: `url(${food})`
     },
     button: {
-        backgroundColor: '#f09559',
+        backgroundColor: '#ffa733',
         margin: theme.spacing(2),
         align: 'center',
         fontSize: '18px',
         color: 'white'
     },
     button1: {
-        backgroundColor: '#502664',
+        backgroundColor: '#ffa733',
         margin: theme.spacing(2),
         align: 'center',
 
@@ -39,16 +39,16 @@ import food from '../api/apiClient';
     },
     rot: {
         padding: theme.spacing(4),
-        color: '#f09559',
+        color:'#ffa733'
 
     },
     rotx: {
         padding: theme.spacing(2),
-        color: '#f09559',
+        color:'#ffa733'
     },
     fab:{
         margin: theme.spacing(2),
-        color: '#f09559',
+         color:'#ffa733',
         align:'right'
     },
     spejsing:{

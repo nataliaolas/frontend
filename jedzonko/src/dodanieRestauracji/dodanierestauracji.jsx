@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useForm } from "react-hook-form";
 import apiClient from '../api/apiClient';
+import Tabela from './tabela';
+import { generate } from "shortid";
 
 export default function DodanieRestauracji() {
     const classes = useStyles();
@@ -18,8 +20,9 @@ export default function DodanieRestauracji() {
     const [data, setData] = useState();
     const[nazwadania,setDanie] = useState("");
     const[cena,setCena] = useState("");
-    const[skladniki, setSkladniki] = useState("");
+    const[sklad, setSkladniki] = useState("");
     const [restauracje, TypyRestauracji] = React.useState('');
+    const[rows,setRows]=useState();
     const handleChangers = (event) => {
         TypyRestauracji(event.target.value);
     };
@@ -59,7 +62,7 @@ export default function DodanieRestauracji() {
     const handleChange1 = (form) =>{
         form.nazwadania = nazwadania;
         form.cena = cena;
-        form.skladniki = skladniki;
+        form.sklad = sklad;
         DodanieMenu(form);
         console.log("form",form)
     }
@@ -129,17 +132,14 @@ export default function DodanieRestauracji() {
                         </div>
                     </Paper>
                     </form>
-
-
-
-                     <form onSubmit={handleSubmit(handleChange1)}>                      
+                    <form onSubmit={handleSubmit(handleChange1)}>                      
                     <div className={classes.napis}>Dodanie MENU</div>
                     <div align="center">
                         <Paper outlined={3}>
                         <TextField
                             required id="standard-basic"
                             label="Nazwa dania"
-                            name="Nazwa"
+                            name="nazwadania"
                             value={nazwadania}
                             className={classes.spejsing}
                             onChange={(e) => setDanie(e.target.value)}
@@ -157,20 +157,27 @@ export default function DodanieRestauracji() {
                             label="Składniki"
                             multiline
                             rows={4}
-                            value={skladniki}
+                            name="sklad"
+                            value={sklad}
                             className={classes.spejsing}
                             onChange={(e) => setSkladniki(e.target.value)}
                         />
+                           <div align='center'>
+                        <Button variant="contained" className={classes.button} type="submit" onSubmit={data => {
+          setRows(currentRows => [
+            {
+              id: generate(),
+              ...data
+            },
+            ...currentRows
+          ])}}> Dodaj  </Button>
+                    </div>
+                    <Tabela rows={[{nazwadania, cena,sklad}]}/>
                         </Paper>
                     <div>
-                        <Tooltip title="Dodaj" aria-label="add">
-                            <Fab color="default" size="small" type="submit">
-                                <AddIcon />
-                            </Fab>
-                        </Tooltip>
                     </div>
                     </div>
-                    </form>
+                    </form> 
                     <div align='center'>
                         <Button variant="contained" className={classes.button} type="submit"> Dodaj  </Button>
                     </div>
