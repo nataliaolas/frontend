@@ -66,6 +66,10 @@ export default function SimpleMenu() {
         return response.data;
     };
 
+    const dodajPozycje = async() =>{
+        const response = await apiClient.post(`http://127.0.0.1:8000/zamowienie/`);
+    };
+
     useEffect(() => {
         async function fetchData() {
             const response = await getMenu(restauracjaid);
