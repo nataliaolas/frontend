@@ -9,12 +9,14 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container } from '@material-ui/core';
 import DodanieRestauracji from "../../dodanieRestauracji/dodanierestauracji";
-import { Home, Restauracja,Login,addrest,Wszystkie,Restauracji,Kroki} from "../../paths/Routs";
+import Rejestracja from '../../rejestracja/rejestracja';
 import WszystkieRestauracje from "../wszystkierestauracje/wszystkierest";
 import KrokiZamowienia from "../FormularzZamowienia/krokiZamowienia";
 import MainPage from "./Home"; 
 import WidokRestauracji from "../restauracja/restauracje"
 import LoginView from "../logowanie/logowanie";
+import PanelZamowien from '../panelZamowien/panZamowien';
+import { Home,Wszystkie,Restauracja,Login,Restauracji,Kroki,panel,Zarejestrowanie,addrest} from "../../paths/Routs";
 import PodgladRestauracji from "../podglądRestauracji/podgladrestauracji";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,17 +81,20 @@ export default function ButtonAppBar() {
             <Typography variant="h6" className={classes.title}>
               <FastfoodIcon />
             Jedzonko.pl
-          </Typography>           
-            <Button color="inherit">Login</Button>
+          </Typography>  
+         <Link to="/zamowieniapanel"><Button color="inherit" >Zamowienia</Button> </Link>         
+          <Link to="/logowanie"> <Button color="inherit">Login</Button> </Link>  
           </Toolbar>
         </AppBar>
         <Container>
           <Switch>
             <Route path={addrest} component={DodanieRestauracji} />
+            <Route path={Zarejestrowanie} component={Rejestracja}/>
             <Route path={Wszystkie} component={WszystkieRestauracje}/>
             <Route path={Kroki} component={KrokiZamowienia} />
             <Route path={ Restauracja } component = { WidokRestauracji } />
-            <Route path={ Login } component = { LoginView }/>        
+            <Route path={ Login } component = { LoginView }/>
+            <Route path={panel}  component={PanelZamowien} />          
             <Route path={Restauracji} component={PodgladRestauracji}/>
             <Route path={ Home } component = { MainPage }/>
           </Switch>

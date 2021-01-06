@@ -50,16 +50,24 @@ const useStyles = makeStyles((theme) => ({
         },
         bottom: 120
     },
+    but:{
+        backgroundColor:'#ffa733',
+    }
 }));
 
 export default function SimpleMenu() {
     const classes = useStyles();
     const { restauracjaid } = useParams();
     const [data, setData] = React.useState();
+    const [count, setCount] = useState(0);
 
     const getMenu = async (restauracjaid) => {
         const response = await apiClient.get(`http://127.0.0.1:8000/menu/${restauracjaid}`);
         return response.data;
+    };
+
+    const dodajPozycje = async() =>{
+        const response = await apiClient.post(`http://127.0.0.1:8000/zamowienie/`);
     };
 
     useEffect(() => {
@@ -81,14 +89,22 @@ export default function SimpleMenu() {
                                 {pozycja.nazwa}
                             </Typography>
                             <Typography className={classes.title} name="cena" variant="h7">
-                                {pozycja.cena}
+                               Cena: {pozycja.cena} zł
                             </Typography>
                             <Typography className={classes.pos} color="textSecondary">
                                 {pozycja.sklad}
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button className={classes.koszyk} size="small">Dodaj do koszyka</Button>
+                            <Paper elevation={3}>
+                 <p>{count}</p>
+                 <Button onClick={() => setCount(count + 1)} className={classes.but}>
+                Dodaj do koszyka
+                 </Button>
+                 <Button onClick={() => setCount(count-1)} className={classes.but}>
+                Usuń z koszyka
+                 </Button>
+                 </Paper>
                         </CardActions>
                     </Card>
                 )) : "ładowanie"}
