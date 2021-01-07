@@ -23,6 +23,8 @@ import { Link } from "react-router-dom";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import food4 from '../../images/food4.jpg';
 import CardMedia from '@material-ui/core/CardMedia';
+import Box from '@material-ui/core/Box';
+import { useForm } from "react-hook-form";
 
 export default function PodgladRestauracji() {
   const classes = useStyles();
@@ -30,9 +32,17 @@ export default function PodgladRestauracji() {
   const [data, setData] = React.useState();
   const [data1, setData1] = React.useState();
   const [data2, setData2] = React.useState();
+  const [value, setValue] = React.useState();
+  const[zadowolenie_klienta,setZadowolenie] = React.useState();
+  const[opis,setOpis] = React.useState();
   const { restauracjaid } = useParams();
   const history = useHistory();
 
+  const { handleSubmit} = useForm(
+    {
+        mode: 'onSubmit',
+    },
+);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -56,6 +66,9 @@ export default function PodgladRestauracji() {
     return response.data;
   };
 
+  const dodajOpinie = async(form) =>{
+    await apiClient.post(`http://127.0.0.1:8000/opiniaorestauracji/`,form);
+  };
   useEffect(() => {
     async function fetchData() {
         const response = await getRestauracja(restauracjaid);
@@ -80,7 +93,12 @@ useEffect(() => {
   }
   fetchData2();
 }, []);
-
+const handleChange = (form) => {
+  form.zadowolenie_klienta = zadowolenie_klienta;
+  form.opis = opis;
+  dodajOpinie(form);
+  
+}
 
 console.log("data: ", data);
   return (
@@ -135,10 +153,10 @@ console.log("data: ", data);
           <Card className={classes.root} key={pozycja.id} value={pozycja}>
             <CardContent>
               <Typography className={classes.title} name="nazwa" gutterBottom>
-              {pozycja.nazwa}
+              {pozycja.nazwadania}
     </Typography>
               <Typography className={classes.title} variant="overline" display="block" name="cena" gutterBottom>
-               {pozycja.cena}
+               {pozycja.cena} zł
     </Typography>
               <Typography className={classes.pos} name="pozycja" color="textSecondary">
                 {pozycja.sklad}
@@ -152,6 +170,31 @@ console.log("data: ", data);
           <AddShoppingCartIcon fontSize="inherit" />
         </IconButton>
         </Link>
+        </Paper>
+        <Paper>
+          <form  onSubmit={handleSubmit(handleChange)}>
+        <Box component="fieldset" mb={3} borderColor="transparent">
+        <Typography component="legend">Wystaw Opinie:</Typography>
+        <Rating
+          name="simple-controlled"
+          value={zadowolenie_klienta}
+          onChange={(e) => {
+            setZadowolenie(e.target.value);
+          }}
+        />
+      </Box>
+      <TextField
+          id="standard-multiline-static"
+          label="Komentarz"
+          multiline
+          rows={4}
+          value={opis}
+          onChange={(e) => setOpis(e.target.value)}
+        />
+        <div>
+          <Button  className={classes.buton} type="submit">Dodaj opinie</Button>
+          </div>
+          </form>
         </Paper>
       </div>
     </Container>

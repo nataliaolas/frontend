@@ -21,9 +21,11 @@ export default function DodanieRestauracji() {
     const[nazwadania,setDanie] = useState("");
     const[cena,setCena] = useState("");
     const[sklad, setSkladniki] = useState("");
+    const[nr_budynku,setBudynek] = useState("");
+    const[ulica,setUlica] = useState("");
     const [restauracje, TypyRestauracji] = React.useState('');
     const[rows,setRows]=useState([]);
-
+    const[open,setOpen] = useState(false);
     const handleChangers = (event) => {
         TypyRestauracji(event.target.value);
     };
@@ -34,10 +36,25 @@ export default function DodanieRestauracji() {
         },
     );
 
-
     const DodanieRestauracji = async (form) => {
-        await apiClient.post(`http://127.0.0.1:8000/restauracja/`, form);
+        var adresy = {
+            "miasto": form.miasto,
+            "ulica": form.ulica,
+            "nr_budynku": form.nr_budynku,
+        }
+        var data = {
+            "nazwa": nazwa,
+            "adresy": adresy,
+            "typ": form.typ,
+            "opis": form.opis,
+        }
+        await apiClient.post(`http://127.0.0.1:8000/restauracja/`, data);
+        setOpen(true);
     };
+
+    // const DodanieRestauracji = async (form) => {
+    //     await apiClient.post(`http://127.0.0.1:8000/restauracja/`, form);
+    // };
 
     const DodaniePozycji = async (form) => {
         await apiClient.post(`http://127.0.0.1:8000/pozycja/`, form);
@@ -52,9 +69,12 @@ export default function DodanieRestauracji() {
         }
         const restauracje = TypyRestauracji();
     }, []);
+
     const handleChange = (form) => {
         form.nazwa = nazwa;
         form.miasto = miasto;
+        form.ulica = ulica;
+        form.nr_budynku = nr_budynku;
         form.typ = typ;
         form.opis = opis;
         DodanieRestauracji(form);
@@ -96,6 +116,18 @@ export default function DodanieRestauracji() {
                     <div className={classes.napis}>Dodanie restauracji</div>
                     <Paper outlined={3}>
                         <div align="center">
+                        <Grid item xs={12} sm={6} spacing={3}>
+                        <input
+                                accept="image/*"
+                                defaultValue=''
+                                className={classes.rot}
+                                id="contained-button-file"
+                                multiple
+                                type="file"
+                                backgroundColor="#190423"
+                                name="zdjecie"
+                            />
+                            </Grid>
                             <Grid item xs={12} sm={6} spacing={3}>
                                 <TextField required
                                     id="standard-basic"
@@ -115,6 +147,36 @@ export default function DodanieRestauracji() {
                                     onChange={(e) => setMiasto(e.target.value)}
                                 />
                             </Grid>
+                            <Grid item xs={12} sm={3} spacing={3}>
+                                <TextField
+                                    required id="standard-basic"
+                                    label="Ulica"
+                                    name="ulica"
+                                    defaultValue=''
+                                    value={ulica}
+                                    onChange={(e) => setUlica(e.target.value)}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={3} spacing={3}>
+                                <TextField
+                                    required id="standard-basic"
+                                    label="Numer ulicy"
+                                    name="nr_budynku"
+                                    defaultValue=''
+                                    value={nr_budynku}
+                                    onChange={(e) => setBudynek(e.target.value)}
+                                />
+                            </Grid>
+                            {/* <Grid item xs={12} sm={3} spacing={3}>
+                                <TextField
+                                    required id="standard-basic"
+                                    label="Numer mieszkania"
+                                    name="nr_mieszkania"
+                                    defaultValue=''
+                                    value={nr_mieszkania}
+                                    onChange={(e) => setMieszkanie(e.target.value)}
+                                />
+                            </Grid> */}
                             <Grid item xs={12} sm={6} spacing={2}>
                                 <InputLabel required id="demo-simple-select-label" defaultValue=''>Typ Restauracji</InputLabel>
                                 <div>
