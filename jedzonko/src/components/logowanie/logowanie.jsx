@@ -3,10 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircle, LockOpenRounded } from '@material-ui/icons';
 import { Button, InputAdornment, TextField } from '@material-ui/core';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Container } from '@material-ui/core';
-import { Zarejestrowanie } from "../../paths/Routs";
-import Rejestracja from '../../rejestracja/rejestracja';
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
     grid: {
@@ -35,7 +33,7 @@ export default function LoginView() {
     const classes = useStyles();
 
     return (
-        
+
         <div>
             <Grid container className={classes.grid}>
                 <div className={classes.column}>
@@ -54,11 +52,6 @@ export default function LoginView() {
                     </div>
                 </div>
             </Grid>
-            <Container>
-                <Switch>
-                    <Route path={Zarejestrowanie} component={Rejestracja} />
-                </Switch>
-            </Container>
         </div>
 
     );
