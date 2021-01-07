@@ -35,6 +35,7 @@ export default function Platnosc() {
     const[nr_karty,setKarta] = React.useState("");
     const[termin_karty,setTermin]= React.useState("");
     const[nr_seryjny,setNumer] = React.useState("");
+    const[forma_platnosci,setPlatnosc] = React.useState("");
     const [open, setOpen] = React.useState(false);
 
     function Alert(props) {
@@ -42,28 +43,24 @@ export default function Platnosc() {
     }
 
 
-    const handleClick = () => {
-        setOpen(true);
-    };
-
     const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
+   setOpen(false);
     };
+
     const [state, setState] = React.useState({
         checked: true,
     });
 
     const handleChange1 = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
+        console.log("CHECK BOX VALUE", event.target.checked);
+        setPlatnosc(event.target.checked);
     };
 
     const Platnosc = async(form) =>
     {
      await apiClient.post(`http://127.0.0.1:8000/platnosc/`,form);  
+     setOpen(true);
     };
 
     const {  register, handleSubmit } = useForm({
@@ -75,6 +72,8 @@ export default function Platnosc() {
         form.nr_karty = nr_karty;
         form.termin_karty = termin_karty;
         form.nr_seryjny = nr_seryjny;
+        console.log("FROMA PLATNOSCI", forma_platnosci);
+        form.forma_platnosci = forma_platnosci;
         Platnosc(form);
     };
     return (
@@ -84,7 +83,7 @@ export default function Platnosc() {
                     <Grid className={classes.napis}>
                         <Grid>
                             <FormControlLabel
-                                control={<OrangeCheckbox checked={state.checked} onChange={handleChange1} name="checkedG" />}
+                                control={<OrangeCheckbox checked={state.checked} onChange={handleChange1} name="checked" value={ forma_platnosci}  />}
                                 label="Płatność przy odbiorze"
                             />
                         </Grid>
@@ -122,7 +121,7 @@ export default function Platnosc() {
                             value={nr_seryjny}
                             onChange={(e) => setNumer(e.target.value)}
                         />
-                         <Button className={classes.buton} type="submit" onClick={handleClick}>Zapłać </Button>
+                         <Button className={classes.buton} type="submit">Zapłać </Button>
                     </Grid>
                 </Paper>
             </Grid>

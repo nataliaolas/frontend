@@ -32,15 +32,11 @@ export default function Formularz() {
     }
 
 
-    const handleClick = () => {
-        setOpen(true);
-    };
+    // const handleClick = () => {
+    //     setOpen(true);
+    // };
 
     const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
         setOpen(false);
     };
 
@@ -57,6 +53,7 @@ export default function Formularz() {
             "nr_telefonu": form.nr_telefonu
         }
         await apiClient.post(`http://127.0.0.1:8000/klient/`, data);
+        setOpen(true);
     };
 
     const { register, handleSubmit } = useForm({
@@ -144,7 +141,7 @@ export default function Formularz() {
                             ref={register}
                             onChange={(e) => setTelefon(e.target.value)}
                         />
-                        <Button className={classes.buton} type="submit" onClick={handleClick}>Dodaj adres </Button>
+                        <Button className={classes.buton} type="submit">Dodaj adres </Button>
                     </Grid>
                 </Paper>
             </Grid>

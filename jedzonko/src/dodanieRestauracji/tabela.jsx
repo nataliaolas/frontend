@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 
 
  function Tabela({ rows }) {
+   console.log("ROWS: ", rows);
   return (
     <Paper>
       <Table>

@@ -22,7 +22,8 @@ export default function DodanieRestauracji() {
     const[cena,setCena] = useState("");
     const[sklad, setSkladniki] = useState("");
     const [restauracje, TypyRestauracji] = React.useState('');
-    const[rows,setRows]=useState();
+    const[rows,setRows]=useState([]);
+
     const handleChangers = (event) => {
         TypyRestauracji(event.target.value);
     };
@@ -38,7 +39,7 @@ export default function DodanieRestauracji() {
         await apiClient.post(`http://127.0.0.1:8000/restauracja/`, form);
     };
 
-    const DodanieMenu = async (form) => {
+    const DodaniePozycji = async (form) => {
         await apiClient.post(`http://127.0.0.1:8000/pozycja/`, form);
     };
 
@@ -57,16 +58,36 @@ export default function DodanieRestauracji() {
         form.typ = typ;
         form.opis = opis;
         DodanieRestauracji(form);
-    }
-
-    const handleChange1 = (form) =>{
         form.nazwadania = nazwadania;
         form.cena = cena;
         form.sklad = sklad;
-        DodanieMenu(form);
-        console.log("form",form)
+        DodaniePozycji(form);
     }
 
+    // const handleChange1 = (form) =>{
+    //     form.nazwadania = nazwadania;
+    //     form.cena = cena;
+    //     form.sklad = sklad;
+    //     DodaniePozycji(form);
+    //     console.log("form",form)
+    // }
+
+    const handleTable =(nazwadania,cena,sklad) =>{
+        console.log("W srodku clicka:", nazwadania, " ", cena, " ", sklad);
+        const pozycja = {
+            'id': generate(),
+            'nazwadania':nazwadania,
+            'cena':cena,
+            'sklad':sklad
+        }
+        setRows(rows.concat(pozycja));
+
+        setDanie("");
+        setCena("");
+        setSkladniki("");
+
+
+    }
 
     return (
         <Grid container spacing={3}>
@@ -126,13 +147,8 @@ export default function DodanieRestauracji() {
                                     />
                                 </Grid>
                             </div>
-                            <div align='center'>
-                                <Button variant="contained" className={classes.button} type="submit"> Dodaj  </Button>
-                            </div>
                         </div>
-                    </Paper>
-                    </form>
-                    <form onSubmit={handleSubmit(handleChange1)}>                      
+                    </Paper>                     
                     <div className={classes.napis}>Dodanie MENU</div>
                     <div align="center">
                         <Paper outlined={3}>
@@ -163,24 +179,27 @@ export default function DodanieRestauracji() {
                             onChange={(e) => setSkladniki(e.target.value)}
                         />
                            <div align='center'>
-                        <Button variant="contained" className={classes.button} type="submit" onSubmit={data => {
-          setRows(currentRows => [
-            {
-              id: generate(),
-              ...data
-            },
-            ...currentRows
-          ])}}> Dodaj  </Button>
+                        <Button variant="contained" className={classes.button} onClick={ 
+                            (e) => handleTable(nazwadania,cena,sklad)
+        //   () => setRows(currentRows => [
+        //     {
+        //       id: generate(),
+        //       ...data
+        //     },
+        //     ...currentRows
+        //   ])}
+          }> Dodaj  </Button>
+          {console.log("ROWS PRZED TABELA:", rows)}
                     </div>
-                    <Tabela rows={[{nazwadania, cena,sklad}]}/>
+                    <Tabela rows={rows}/> {/* [{nazwadania, cena,sklad}] */}
                         </Paper>
                     <div>
                     </div>
+                    </div> 
+                    <div align='center'>
+                        <Button variant="contained" className={classes.button} type="submit" > Dodaj  </Button>
                     </div>
                     </form> 
-                    <div align='center'>
-                        <Button variant="contained" className={classes.button} type="submit"> Dodaj  </Button>
-                    </div>
             </div>
         </Grid>
     );

@@ -63,6 +63,7 @@ export default function SimpleMenu() {
 
     const getMenu = async (restauracjaid) => {
         const response = await apiClient.get(`http://127.0.0.1:8000/menu/${restauracjaid}`);
+        
         return response.data;
     };
 
@@ -74,6 +75,7 @@ export default function SimpleMenu() {
         async function fetchData() {
             const response = await getMenu(restauracjaid);
             setData(response);
+            
         }
         fetchData();
     }, []);
@@ -86,7 +88,7 @@ export default function SimpleMenu() {
                     <Card className={classes.root} value={pozycja} key={pozycja.id}>
                         <CardContent>
                             <Typography className={classes.title} variant="subtitle2">
-                                {pozycja.nazwa}
+                                {pozycja.nazwadania}
                             </Typography>
                             <Typography className={classes.title} name="cena" variant="h7">
                                Cena: {pozycja.cena} zł
