@@ -3,6 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircle, LockOpenRounded } from '@material-ui/icons';
 import { Button, InputAdornment, TextField } from '@material-ui/core';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Container } from '@material-ui/core';
+import { Zarejestrowanie } from "../../paths/Routs";
+import Rejestracja from '../../rejestracja/rejestracja';
 
 const useStyles = makeStyles((theme) => ({
     grid: {
@@ -16,34 +20,47 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 300,
         maxWidth: 400,
     },
-    butttton:{
-        backgroundColor:'#ffa733'
+    butttton: {
+        backgroundColor: '#ffa733'
+    },
+    link: {
+        margin: "10px",
+        padding: "10px"
     }
 }));
 
 export default function LoginView() {
 
+    const preventDefault = (event) => event.preventDefault();
     const classes = useStyles();
 
     return (
+        
         <div>
             <Grid container className={classes.grid}>
                 <div className={classes.column}>
-                    <TextField label="Username" margin="normal" InputProps={{startAdornment: <InputAdornment><AccountCircle/></InputAdornment>}}/>
-                    <TextField label="Password" margin="normal" InputProps={{startAdornment: <InputAdornment><LockOpenRounded/></InputAdornment>}}/>
-                    <div style={{height: 30}}/>
+                    <TextField label="Nazwa użytkownika" margin="normal" InputProps={{ startAdornment: <InputAdornment><AccountCircle /></InputAdornment> }} />
+                    <TextField label="Hasło" margin="normal" InputProps={{ startAdornment: <InputAdornment><LockOpenRounded /></InputAdornment> }} />
+                    <div style={{ height: 30 }} />
                     <Button className={classes.butttton} variant="contained">
-                        Log in
-                    </Button>
-                    <div style={{height: 30}}/>
+                        Zaloguj
+                        </Button>
+                    <div style={{ height: 30 }} />
                     <div>
-                        Forgot your password?
-                    </div>   
+                        <Link href="#" onClick={preventDefault} className={classes.link}>Zapomniałeś hasła?</Link>
+                        <Link to="/rejestracja" className={classes.link}>Rejestracja</Link>
+                    </div>
                     <div>
-                    </div>                               
+                    </div>
                 </div>
             </Grid>
+            <Container>
+                <Switch>
+                    <Route path={Zarejestrowanie} component={Rejestracja} />
+                </Switch>
+            </Container>
         </div>
+
     );
 
 };
