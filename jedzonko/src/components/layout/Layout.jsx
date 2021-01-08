@@ -18,6 +18,7 @@ import LoginView from "../logowanie/logowanie";
 import PanelZamowien from '../panelZamowien/panZamowien';
 import { Home,Wszystkie,Restauracja,Login,Restauracji,Kroki,panel,Zarejestrowanie,addrest} from "../../paths/Routs";
 import PodgladRestauracji from "../podglądRestauracji/podgladrestauracji";
+import logo from '../../images/loggo.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,10 +81,12 @@ export default function ButtonAppBar() {
             </IconButton>
             <Typography variant="h6" className={classes.title}>
               <FastfoodIcon />
-            Jedzonko.pl
+              {/* <Link to="/Home" style={{ textDecoration: 'none' ,color: '#FFF'}}><Button color="inherit"  style={{fontSize: 'large'}}>Jedzonko.pl</Button> </Link>          */}
+              <Link to="/Home" style={{ textDecoration: 'none'}}> <img src={logo} alt="logo" width="150" height="25" padding='5'/></Link>
+             
           </Typography>  
-         <Link to="/zamowieniapanel"><Button color="inherit" >Zamowienia</Button> </Link>         
-          <Link to="/logowanie"> <Button color="inherit">Login</Button> </Link>  
+         <Link to="/zamowieniapanel"style={{ textDecoration: 'none' ,color: '#FFF'}}><Button color="inherit"  style={{textTransform: 'capitalize', fontSize: 'large'}}>Zamówienia</Button> </Link>         
+          <Link to="/logowanie"style={{ textDecoration: 'none' ,color: '#FFF'}}> <Button color="inherit" style={{textTransform: 'capitalize', fontSize: 'large'}}>Login</Button> </Link>  
           </Toolbar>
         </AppBar>
         <Container>
