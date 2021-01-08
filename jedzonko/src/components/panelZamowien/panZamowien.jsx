@@ -49,6 +49,8 @@ export default function PanelZamowien() {
             onClick={(event) => event.stopPropagation()}
             onFocus={(event) => event.stopPropagation()}
             control={<Checkbox />}
+            key={zamowienia.id}
+           value={zamowienia}
             label="Zamowienie 1"
           />
         </AccordionSummary>
