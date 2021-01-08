@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import apiClient from '../../api/apiClient';
 
 const useStyles = makeStyles({
   root: {
@@ -20,10 +21,22 @@ const useStyles = makeStyles({
 
 export default function PanelZamowien() {
   const classes = useStyles();
+  const[data,setData] = React.useState();
+  useEffect(() => {
+    const ListaZamowien = async () => {
+        const response = await apiClient.get(`http://127.0.0.1:8000/zamowienie/`);
+        console.log("Odpowiedz", response.data);
+        setData(response.data);
+        return response.data; 
+    }
+    const zamowienia= ListaZamowien();
+
+}, []);
 
   return (
     <div className={classes.root}>
         <Typography className={classes.napis} variant="h4" display="block" gutterBottom> Panel Zamówień </Typography>
+        {data ? data.map((zamowienia) => (
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -44,7 +57,7 @@ export default function PanelZamowien() {
             Zamówienie:
           </Typography>
           <Typography color="textSecondary" variant="h6">
-            tutaj zamowienia
+           {zamowienia.pozycje}
           </Typography>
         </AccordionDetails>
         <AccordionDetails>
@@ -52,7 +65,7 @@ export default function PanelZamowien() {
             Adres klienta:
           </Typography>
           <Typography color="textSecondary" variant="h6">
-            tutaj adres 
+           {zamowienia.klient}
           </Typography>
         </AccordionDetails>
         <AccordionDetails>
@@ -60,10 +73,11 @@ export default function PanelZamowien() {
             Forma płatności oraz cena:
           </Typography>
           <Typography color="textSecondary" variant="h6">
-            Cena i platnosc
+            {zamowienia.cena_zamowienia} zł
           </Typography>
         </AccordionDetails>
       </Accordion>
+       )): "ładowanie"};
     </div>
   );
 }
