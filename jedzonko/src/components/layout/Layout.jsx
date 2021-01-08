@@ -19,6 +19,8 @@ import PanelZamowien from '../panelZamowien/panZamowien';
 import { Home,Wszystkie,Restauracja,Login,Restauracji,Kroki,panel,Zarejestrowanie,addrest} from "../../paths/Routs";
 import PodgladRestauracji from "../podglądRestauracji/podgladrestauracji";
 import logo from '../../images/loggo.png'
+import PrivateRoute from "../../privateRouter/PrivateRoute";
+import AuthService from "../api/auth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,12 +88,12 @@ export default function ButtonAppBar() {
              
           </Typography>  
          <Link to="/zamowieniapanel"style={{ textDecoration: 'none' ,color: '#FFF'}}><Button color="inherit"  style={{textTransform: 'capitalize', fontSize: 'large'}}>Zamówienia</Button> </Link>         
-          <Link to="/logowanie"style={{ textDecoration: 'none' ,color: '#FFF'}}> <Button color="inherit" style={{textTransform: 'capitalize', fontSize: 'large'}}>Login</Button> </Link>  
+          <Link to="/logowanie"style={{ textDecoration: 'none' ,color: '#FFF'}}> <Button color="inherit" style={{textTransform: 'capitalize', fontSize: 'large'}}>{AuthService.getCurrentUser() ? "Logout": "Login"}</Button> </Link>  
           </Toolbar>
         </AppBar>
         <Container>
           <Switch>
-            <Route path={addrest} component={DodanieRestauracji} />
+            <PrivateRoute path={addrest} component={DodanieRestauracji} />
             <Route path={Zarejestrowanie} component={Rejestracja}/>
             <Route path={Wszystkie} component={WszystkieRestauracje}/>
             <Route path={Kroki} component={KrokiZamowienia} />

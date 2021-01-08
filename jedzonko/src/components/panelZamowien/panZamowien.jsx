@@ -37,7 +37,7 @@ export default function PanelZamowien() {
     <div className={classes.root}>
         <Typography className={classes.napis} variant="h4" display="block" gutterBottom> Panel Zamówień </Typography>
         {data ? data.map((zamowienia) => (
-      <Accordion>
+      <Accordion key={zamowienia.id}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-label="Expand"
@@ -57,7 +57,16 @@ export default function PanelZamowien() {
             Zamówienie:
           </Typography>
           <Typography color="textSecondary" variant="h6">
-           {zamowienia.pozycje}
+           {zamowienia.pozycje.map((pozycja) => (
+              <AccordionDetails key={pozycja.id}>
+                <Typography color="textSecondary" variant="h6">
+                {pozycja.nazwadania}
+                </Typography>
+                <Typography color="textSecondary" variant="h6">
+                {pozycja.cena} zł
+                </Typography>
+              </AccordionDetails>
+           ))}
           </Typography>
         </AccordionDetails>
         <AccordionDetails>

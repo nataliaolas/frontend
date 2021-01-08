@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import apiClient from '../api/apiClient';
 import { useParams } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) =>({
   root: {
@@ -51,7 +52,14 @@ export default function Zamowienie() {
     <Grid item xs={6}><Typography color="textSecondary" className={classes.zamowienie1}>CENA ZAMÓWIENIA</Typography> </Grid>
     <Grid item xs={6}> <Typography gutterBottom className={classes.child}>{data ? data.cena_zamowienia:"ładowanie"} </Typography> </Grid>
     <Grid item xs={6}><Typography color="textSecondary" className={classes.zamowienie1}>ZAMÓWIONE DANIA</Typography> </Grid>
-    <Grid item xs={6}> <Typography gutterBottom className={classes.child}>{data ? data.pozycje:"ładowanie"}</Typography> </Grid>
+    <Grid item xs={6}> <Typography gutterBottom className={classes.child}>{data ? data.pozycje.map((pozycja) => (<Grid key={pozycja.id}>
+      <Typography color="textSecondary" variant="h6">
+                {pozycja.nazwadania}
+                </Typography>
+                <Typography color="textSecondary" variant="h6">
+                {pozycja.cena} zł
+      </Typography>
+    </Grid>)):"ładowanie"}</Typography> </Grid>
     <Grid item xs={6}><Typography color="textSecondary" className={classes.zamowienie1}>ADRES DOSTAWY</Typography> </Grid>
     <Grid item xs={6}> <Typography gutterBottom className={classes.child}>adres adres adres</Typography> </Grid>
     <Grid item xs={6}><Typography color="textSecondary" className={classes.zamowienie1}>CZAS DOSTAWY</Typography> </Grid>
