@@ -7,10 +7,12 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
 
  function Tabela({ rows }) {
    console.log("ROWS: ", rows);
+   
   return (
     <Paper>
       <Table>
@@ -26,7 +28,8 @@ import Paper from "@material-ui/core/Paper";
             <TableRow key={row.id}>
               <TableCell>{row.nazwadania}</TableCell>
               <TableCell>{row.cena}</TableCell>
-              <TableCell>{row.sklad}</TableCell>    
+              <TableCell>{row.sklad}</TableCell>   
+              <TableCell><Button > <DeleteIcon/></Button></TableCell>    
              </TableRow>
           ))} 
         </TableBody>
