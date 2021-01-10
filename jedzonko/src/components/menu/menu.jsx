@@ -76,6 +76,8 @@ export default function SimpleMenu() {
     useEffect(() => {
         async function fetchData() {
             const response = await getMenu(restauracjaid);
+            console.log("LOG FROM FETCH");
+            console.log("DATA FROM FETCH", response);
             setData(response);
             
         }
@@ -145,7 +147,8 @@ export default function SimpleMenu() {
         <div className={classes.root}>
             <Paper>
                 <Typography className={classes.menutitle} component="h1"> Menu restauracji</Typography>
-                {data ? data.pozycje.map((pozycja) => (
+                {console.log("DATA NA STRONIE", data ? data[0].pozycje : 0)}
+                {data ? data[0].pozycje?.map((pozycja) => (
                     <Card className={classes.root} value={pozycja} key={pozycja.id}>
                         <CardContent>
                             <Typography className={classes.title} variant="subtitle2">
