@@ -21,7 +21,17 @@ class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("user");
+    // let user = JSON.parse(localStorage.getItem('user'));
+    // return axios
+    // .get(`${API_URL + "logout"}`, {
+    //   user
+    // })
+    // .then(response => {
+    //   console.log("RESPONSE: ", response);
+    //   localStorage.removeItem("user");
+    //   return response;
+    // });
+     localStorage.removeItem("user");
   }
 
   register(email, username, password, password2, first_name, last_name) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,6 +21,7 @@ import PodgladRestauracji from "../podglądRestauracji/podgladrestauracji";
 import logo from '../../images/loggo.png'
 import PrivateRoute from "../../privateRouter/PrivateRoute";
 import AuthService from "../api/auth";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,6 +74,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const [reload, setReload] = useState(false);
+ // let history = useHistory();
+
+
+
+  const HandleWyloguj = () =>{
+    AuthService.logout()
+    window.location.reload();
+  }
+
+  
+
 
   return (
     <Router>
@@ -87,8 +100,16 @@ export default function ButtonAppBar() {
               <Link to="/Home" style={{ textDecoration: 'none'}}> <img src={logo} alt="logo" width="150" height="25" padding='5'/></Link>
              
           </Typography>  
-         <Link to="/zamowieniapanel"style={{ textDecoration: 'none' ,color: '#FFF'}}><Button color="inherit"  style={{textTransform: 'capitalize', fontSize: 'large'}}>Zamówienia</Button> </Link>         
-          <Link to="/logowanie"style={{ textDecoration: 'none' ,color: '#FFF'}}> <Button color="inherit" style={{textTransform: 'capitalize', fontSize: 'large'}}>{AuthService.getCurrentUser() ? "Logout": "Login"}</Button> </Link>  
+         <Link to="/zamowieniapanel"style={{ textDecoration: 'none' ,color: '#FFF'}}><Button color="inherit"  style={{textTransform: 'capitalize', fontSize: 'large'}}>Zamówienia</Button> </Link>
+         {console.log("AUTH USER",AuthService.getCurrentUser())}
+         { 
+         (AuthService.getCurrentUser())
+        ?
+        <Link to="/" style={{ textDecoration: 'none' ,color: '#FFF'}}> <Button onClick={() => HandleWyloguj()} color="inherit" style={{textTransform: 'capitalize', fontSize: 'large'}}>Wyloguj sie</Button> </Link> 
+        :
+        <Link to="/logowanie"style={{ textDecoration: 'none' ,color: '#FFF'}}> <Button color="inherit" style={{textTransform: 'capitalize', fontSize: 'large'}}>Zaloguj się</Button> </Link>  
+         }
+          {/* <Link to="/logowanie"style={{ textDecoration: 'none' ,color: '#FFF'}}> <Button color="inherit" style={{textTransform: 'capitalize', fontSize: 'large'}}>{AuthService.getCurrentUser() ? "Logout": "Login"}</Button> </Link>   */}
           </Toolbar>
         </AppBar>
         <Container>

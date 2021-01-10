@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { useHistory, useParams } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
+import { LensTwoTone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -60,6 +61,7 @@ export default function SimpleMenu() {
     const { restauracjaid } = useParams();
     const [data, setData] = React.useState();
     const [count, setCount] = useState(0);
+    const [koszyk, setKoszyk] = useState([])
 
     const getMenu = async (restauracjaid) => {
         const response = await apiClient.get(`http://127.0.0.1:8000/menu/${restauracjaid}`);
@@ -80,6 +82,65 @@ export default function SimpleMenu() {
         fetchData();
     }, []);
 
+    const DodajDoKoszyka = (nazwadania, cena, sklad) =>{
+        const pozycja = {
+            'nazwadania': nazwadania,
+            'cena': cena,
+            'sklad': sklad
+        }
+        setKoszyk(koszyk.concat(pozycja));
+        setCount(count+1);
+    }
+    const UsunZKoszyka = (nazwa, cena, sklad) =>{
+        let tmp = koszyk.filter(koszyk => { return koszyk.nazwadania === nazwa});
+        tmp.pop();
+        console.log("TMP PO POPIE", tmp);
+        if (tmp.length >= 0)
+        {
+            console.log("KOSZYK PRZED FILTREM", koszyk);
+            let tmp_length = 1;
+            if(tmp.length>1)
+            {
+                tmp_length = tmp.length-1;
+            }
+            console.log("TMP LENGTH", tmp_length);
+            let new_koszyk = koszyk.filter(koszyk => { return koszyk.nazwadania !== nazwa});
+            console.log("NOWY KKOSZYK", new_koszyk);
+            for(let i =0; i<tmp_length; i++)
+              {
+                new_koszyk.push(tmp[i]);
+                // setKoszyk(
+                //         koszyk.filter(koszyk => { return koszyk.nazwadania !== nazwa})
+                // );
+                
+                console.log("TMP W FORZE", tmp[i]);
+              }
+              setKoszyk(new_koszyk);
+
+            // setKoszyk(
+            //     koszyk.filter(koszyk => { return koszyk.nazwadania !== nazwa})
+            //   );
+            //    console.log("KOSZYK PO FILTRZE", koszyk);
+               
+            //   for(let i =0; i<tmp.length; i++)
+            //   {
+            //     const pozycja = {
+            //         'nazwadania': nazwa,
+            //         'cena': cena,
+            //         'sklad': sklad
+            //     }
+            //     setKoszyk(koszyk.concat(pozycja));
+            //   }
+            // for (let pozycja of tmp)
+            // {
+            //     setKoszyk(koszyk.concat(pozycja));
+            // }
+            //  console.log("KOSZYK PO DODANIU TMP", koszyk.filter(koszyk => { return koszyk.nazwadania === nazwa}).length);
+              setCount(count-1);            
+        }
+
+    }
+
     return (
         <div className={classes.root}>
             <Paper>
@@ -99,11 +160,16 @@ export default function SimpleMenu() {
                         </CardContent>
                         <CardActions>
                             <Paper elevation={3}>
-                 <p>{count}</p>
-                 <Button onClick={() => setCount(count + 1)} className={classes.but}>
+                 <p>{
+                 console.log("KOSZYK W P", koszyk ? koszyk : 0)}
+                 {(koszyk === undefined)
+                  ? 0
+                  : koszyk.filter(koszyk => { return koszyk?.nazwadania === pozycja.nazwadania}).length}</p>
+                 {/* <p>{ count}</p> */}
+                 <Button onClick={() => DodajDoKoszyka(pozycja.nazwadania,pozycja.cena, pozycja.sklad)} className={classes.but}>
                 Dodaj do koszyka
                  </Button>
-                 <Button onClick={() => setCount(count-1)} className={classes.but}>
+                 <Button onClick={() => UsunZKoszyka(pozycja.nazwadania,pozycja.cena, pozycja.sklad)} className={classes.but}>
                 Usuń z koszyka
                  </Button>
                  </Paper>

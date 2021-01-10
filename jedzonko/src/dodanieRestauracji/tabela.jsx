@@ -10,9 +10,18 @@ import Paper from "@material-ui/core/Paper";
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 
- function Tabela({ rows }) {
+ function Tabela({ rows, setRows }) {
    console.log("ROWS: ", rows);
    
+  const HandleClick = (nazwa, cena, sklad) =>{
+
+    console.log("ROW OD ID", rows.filter(rows => { return rows.nazwadania === nazwa && rows.cena === cena && rows.sklad === sklad}));
+    setRows(
+      rows.filter(rows => { return rows.nazwadania !== nazwa && rows.cena !== cena && rows.sklad !== sklad})
+    )
+    
+  }
+  
   return (
     <Paper>
       <Table>
@@ -29,7 +38,7 @@ import Button from '@material-ui/core/Button';
               <TableCell>{row.nazwadania}</TableCell>
               <TableCell>{row.cena}</TableCell>
               <TableCell>{row.sklad}</TableCell>   
-              <TableCell><Button > <DeleteIcon/></Button></TableCell>    
+              <TableCell><Button onClick ={() => HandleClick(row.nazwadania,row.cena, row.sklad)}> <DeleteIcon/></Button></TableCell>    
              </TableRow>
           ))} 
         </TableBody>
