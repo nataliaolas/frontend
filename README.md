@@ -10,7 +10,7 @@ Jedzonko.pl allow to:
   * searching for restaurant from a lot of cities
   * add opinion about restaurant 
   * select position from selected restaurantam in moment when customer places an order
-* in resttaurant sides: 
+* in restaurant sides: 
   * login 
   * logout
   * a list of order 
