@@ -17,7 +17,7 @@ Jedzonko.pl allow to:
   * possibility on edit account
   * add menu and possibility to change menu and price posisition 
 
-##Technologies 
+## Technologies 
 * Reacts JS 
 * Material-UI 
 
